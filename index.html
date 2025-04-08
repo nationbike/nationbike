@@ -62,6 +62,24 @@
       margin-right: 20px;
       color: white;
     }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
   </style>
 </head>
 <body>
@@ -102,7 +120,31 @@
 <div class="section" id="booking">
   <h2 class="en">Book a Service</h2>
   <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
-  <p><a href="#">Click here to book online</a></p>
+  <form>
+    <label class="en">Name</label>
+    <label class="hi" style="display:none;">नाम</label>
+    <input type="text" name="name" placeholder="Your name" required>
+
+    <label class="en">Phone</label>
+    <label class="hi" style="display:none;">फोन</label>
+    <input type="tel" name="phone" placeholder="Your phone number" required>
+
+    <label class="en">Service Required</label>
+    <label class="hi" style="display:none;">चाहिए गए सेवा</label>
+    <select name="service">
+      <option>General Repair</option>
+      <option>Oil Change</option>
+      <option>Part Replacement</option>
+      <option>Custom Work</option>
+    </select>
+
+    <label class="en">Preferred Date</label>
+    <label class="hi" style="display:none;">निर्धारित तारीख</label>
+    <input type="date" name="date">
+
+    <button type="submit" class="en">Submit</button>
+    <button type="submit" class="hi" style="display:none;">जमा करें</button>
+  </form>
 </div>
 
 <div class="section" id="purchase">
