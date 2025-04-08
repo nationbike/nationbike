@@ -14,11 +14,11 @@
       background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
       background-size: cover;
     }
-    header {
+    header, footer {
       background: rgba(30, 30, 30, 0.9);
       color: #fff;
-      padding: 20px 0;
       text-align: center;
+      padding: 20px 0;
     }
     nav {
       background: rgba(51, 51, 51, 0.9);
@@ -41,12 +41,6 @@
     .section {
       margin-bottom: 40px;
     }
-    footer {
-      background: rgba(30, 30, 30, 0.9);
-      color: #fff;
-      text-align: center;
-      padding: 15px 0;
-    }
     iframe {
       width: 100%;
       border-radius: 10px;
@@ -63,19 +57,15 @@
       margin-right: 20px;
       color: white;
     }
-    form input, form select, form textarea {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
     }
-    form button {
-      padding: 10px 20px;
-      background: #333;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
+    .whatsapp-button img {
+      width: 60px;
+      height: 60px;
     }
   </style>
 </head>
@@ -88,6 +78,7 @@
       <button onclick="toggleLang('hi')">हिंदी</button>
     </div>
   </header>
+
   <nav>
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
@@ -95,15 +86,13 @@
     <a href="#purchase">Purchase</a>
     <a href="#contact">Contact</a>
   </nav>
-  <div class="container">
 
+  <div class="container">
     <div class="section" id="services">
       <h2 class="en">Our Services</h2>
       <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
       <ul>
-        <li>General Service</li>
-        <li>Engine Repair</li>
-        <li>Oil Change</li>
+        <li>Bike Repair & Maintenance</li>
         <li>Spare Part Sales</li>
         <li>Custom Modification</li>
       </ul>
@@ -121,20 +110,27 @@
     <div class="section" id="booking">
       <h2 class="en">Book a Service</h2>
       <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
-      <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm()">
-        <input type="text" name="name" placeholder="Your Name / आपका नाम" required />
-        <input type="tel" name="phone" placeholder="Phone Number / फ़ोन नंबर" pattern="[0-9]{10}" required />
+      <form action="https://formspree.io/f/xqapgvol" method="POST">
+        <label for="name">Name / नाम:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label for="phone">Phone / फोन:</label><br>
+        <input type="tel" name="phone" pattern="[0-9]{10}" required><br><br>
+
+        <label for="service">Service Type:</label><br>
         <select name="service" required>
-          <option value="">Select Service / सेवा चुनें</option>
-          <option value="General Service">General Service</option>
-          <option value="Engine Repair">Engine Repair</option>
-          <option value="Oil Change">Oil Change</option>
-          <option value="Spare Part Purchase">Spare Part Purchase</option>
-        </select>
-        <label for="date">Appointment Date:</label>
-        <input type="date" name="date" required />
-        <textarea name="message" rows="3" placeholder="Additional Message / अतिरिक्त जानकारी"></textarea>
-        <button type="submit">Book Now / अभी बुक करें</button>
+          <option value="">Select</option>
+          <option>General Service</option>
+          <option>Engine Repair</option>
+          <option>Oil Change</option>
+          <option>Brake Service</option>
+          <option>Other</option>
+        </select><br><br>
+
+        <label for="date">Appointment Date:</label><br>
+        <input type="date" name="date" min="" max="" required><br><br>
+
+        <button type="submit">Submit</button>
       </form>
     </div>
 
@@ -148,16 +144,17 @@
       <h2 class="en">Contact Us</h2>
       <h2 class="hi" style="display:none;">संपर्क करें</h2>
       <p>Email: Mumtaz007alam@gmail.com</p>
-      <p>Phone: +91-7762934833</p>
-      <p>Location: Near Bandhan Bank, Bettiah, Bihar 845438</p>
-    </div>
-
-    <div class="section">
-      <h2 class="en">Find Us on Map</h2>
-      <h2 class="hi" style="display:none;">हमें मानचित्र पर देखें</h2>
+      <p>Phone: 7762934833</p>
+      <p>Near Bandhan Bank, Bettiah, Bihar 845438</p>
+      <p>
+        <a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">
+          View on Google Map / गूगल मैप पर देखें
+        </a>
+      </p>
       <iframe 
         src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" 
         height="300" 
+        style="border:0;" 
         allowfullscreen="" 
         loading="lazy">
       </iframe>
@@ -168,20 +165,27 @@
     <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
   </footer>
 
+  <!-- WhatsApp Chat Button -->
+  <div class="whatsapp-button">
+    <a href="https://wa.me/917762934833" target="_blank">
+      <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="Chat on WhatsApp" />
+    </a>
+  </div>
+
   <script>
     function toggleLang(lang) {
       document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
       document.querySelectorAll('.hi').forEach(el => el.style.display = lang === 'hi' ? 'block' : 'none');
     }
 
-    function validateForm() {
-      const phone = document.querySelector('input[name="phone"]').value;
-      if (!/^\d{10}$/.test(phone)) {
-        alert("Please enter a valid 10-digit phone number.");
-        return false;
-      }
-      return true;
-    }
+    // Set min/max date to today and 7 days ahead
+    const dateInput = document.querySelector('input[type="date"]');
+    const today = new Date();
+    const nextWeek = new Date();
+    nextWeek.setDate(today.getDate() + 7);
+    const formatDate = (date) => date.toISOString().split('T')[0];
+    dateInput.min = formatDate(today);
+    dateInput.max = formatDate(nextWeek);
   </script>
 </body>
 </html>
