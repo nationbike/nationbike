@@ -6,178 +6,89 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      line-height: 1.6;
       margin: 0;
       padding: 0;
-      color: #333;
-      background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
+      background: url('bike-bg-animation.gif') no-repeat center center fixed;
       background-size: cover;
     }
-    header {
-      background: rgba(30, 30, 30, 0.9);
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-    }
-    nav {
-      background: rgba(51, 51, 51, 0.9);
-      padding: 10px;
-      text-align: center;
-    }
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .container {
+    header, section, footer {
+      background: rgba(255, 255, 255, 0.9);
+      margin: 20px;
       padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.95);
       border-radius: 10px;
     }
-    .section {
-      margin-bottom: 40px;
-    }
-    footer {
-      background: rgba(30, 30, 30, 0.9);
-      color: #fff;
+    h1, h2, h3 {
       text-align: center;
-      padding: 15px 0;
     }
-    iframe {
+    .form-group {
+      margin-bottom: 10px;
+    }
+    input, select, button {
       width: 100%;
-      border-radius: 10px;
-    }
-    .gallery img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      margin: 5px;
-      border-radius: 8px;
-    }
-    .lang-toggle {
-      float: right;
-      margin-right: 20px;
-      color: white;
-    }
-    input, select, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #333;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #555;
+      padding: 8px;
+      margin-top: 5px;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Nation Bike Logo" style="max-height: 80px; margin-bottom: 10px;">
     <h1>Nation Bike Spare Part & Workshop</h1>
-    <div class="lang-toggle">
-      <button onclick="toggleLang('en')">English</button>
-      <button onclick="toggleLang('hi')">हिंदी</button>
-    </div>
-  </header>
-  <nav>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#booking">Booking</a>
-    <a href="#purchase">Purchase</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="container"><div class="section" id="services">
-  <h2 class="en">Our Services</h2>
-  <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
-  <ul>
-    <li>Bike Repair & Maintenance</li>
-    <li>Spare Part Sales</li>
-    <li>Custom Modification</li>
-  </ul>
-</div>
+    <h2>नेशन बाइक स्पेयर पार्ट्स और वर्कशॉप</h2>
+  </header>  <section id="services">
+    <h3>Our Services / हमारी सेवाएं</h3>
+    <ul>
+      <li>Bike Repairing / बाइक मरम्मत</li>
+      <li>Spare Parts / स्पेयर पार्ट्स</li>
+      <li>Oil Change / ऑयल बदलना</li>
+      <li>General Servicing / सामान्य सेवा</li>
+    </ul>
+  </section>  <section id="booking">
+    <h3>Book a Service / सेवा बुक करें</h3>
+    <form>
+      <div class="form-group">
+        <label>Name / नाम:</label>
+        <input type="text" name="name" required>
+      </div>
+      <div class="form-group">
+        <label>Phone Number / फ़ोन नंबर:</label>
+        <input type="tel" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label>Preferred Date / पसंदीदा तिथि:</label>
+        <input type="date" name="date">
+      </div>
+      <div class="form-group">
+        <label>Service Type / सेवा प्रकार:</label>
+        <select name="service">
+          <option value="repair">Bike Repair / मरम्मत</option>
+          <option value="oil">Oil Change / ऑयल</option>
+          <option value="general">General Service / सामान्य सेवा</option>
+        </select>
+      </div>
+      <button type="submit">Submit / सबमिट करें</button>
+    </form>
+  </section>
+    <section id="contact">
+  <h3>Contact Us / संपर्क करें</h3>
+  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
 
-<div class="section" id="gallery">
-  <h2 class="en">Shop Gallery</h2>
-  <h2 class="hi" style="display:none;">दुकान की गैलरी</h2>
-  <div class="gallery">
-    <img src="image1.jpg" alt="Shop Image 1">
-    <img src="image2.jpg" alt="Shop Image 2">
-  </div>
-</div>
+  <h3>Address / पता:</h3>
+  <p>Near Bandhan Bank, Bettiah, Bihar 845438</p>
+  <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">
+    View on Google Map / गूगल मैप पर देखें
+  </a></p>
 
-<div class="section" id="booking">
-  <h2 class="en">Book a Service</h2>
-  <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
-  <form>
-    <label class="en">Name</label>
-    <label class="hi" style="display:none;">नाम</label>
-    <input type="text" name="name" placeholder="Your name" required>
-
-    <label class="en">Phone</label>
-    <label class="hi" style="display:none;">फोन</label>
-    <input type="tel" name="phone" placeholder="Your phone number" required>
-
-    <label class="en">Service Required</label>
-    <label class="hi" style="display:none;">चाहिए गए सेवा</label>
-    <select name="service">
-      <option>General Repair</option>
-      <option>Oil Change</option>
-      <option>Part Replacement</option>
-      <option>Custom Work</option>
-    </select>
-
-    <label class="en">Preferred Date</label>
-    <label class="hi" style="display:none;">निर्धारित तारीख</label>
-    <input type="date" name="date">
-
-    <button type="submit" class="en">Submit</button>
-    <button type="submit" class="hi" style="display:none;">जमा करें</button>
-  </form>
-</div>
-
-<div class="section" id="purchase">
-  <h2 class="en">Buy Spare Parts</h2>
-  <h2 class="hi" style="display:none;">स्पेयर पार्ट्स खरीदें</h2>
-  <p><a href="#">Shop online for parts</a></p>
-</div>
-
-<div class="section" id="contact">
-  <h2 class="en">Contact Us</h2>
-  <h2 class="hi" style="display:none;">संपर्क करें</h2>
-  <p>Email: Mumtaz007alam@gmail.com</p>
-  <p>Location: Bettiah, Bihar</p>
-</div>
-
-<div class="section">
-  <h2 class="en">Find Us on Map</h2>
-  <h2 class="hi" style="display:none;">हमें मानचित्र पर देखें</h2>
-  <iframe
-    src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=es;z=14&output=embed"
-    height="300"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade">
+  <iframe 
+    src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" 
+    width="100%" 
+    height="300" 
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy">
   </iframe>
-</div>
-
-  </div>  <footer>
-    <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
-  </footer>  <script>
-    function toggleLang(lang) {
-      document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
-      document.querySelectorAll('.hi').forEach(el => el.style.display = lang === 'hi' ? 'block' : 'none');
-    }
-  </script></body>
+    </section>
+  </section>  <footer>
+    <p>© 2025 Nation Bike Spare Part & Workshop</p>
+  </footer>
+</body>
 </html>
