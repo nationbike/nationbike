@@ -107,8 +107,29 @@
       <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
       <p><a href="#">Click here to book online</a></p>
     </div>
+<div class="section" id="booking">
+  <h2 class="en">Book a Service</h2>
+  <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
+  <form action="https://formspree.io/f/your-form-id" method="POST">
+    <label>Name / नाम:</label><br />
+    <input type="text" name="name" required><br /><br />
 
-    <div class="section" id="purchase">
+    <label>Phone / फ़ोन:</label><br />
+    <input type="tel" name="phone" required><br /><br />
+
+    <label>Service Type / सेवा प्रकार:</label><br />
+    <select name="service">
+      <option>General Service</option>
+      <option>Engine Repair</option>
+      <option>Parts Replacement</option>
+    </select><br /><br />
+
+    <label>Preferred Date / पसंदीदा तिथि:</label><br />
+    <input type="date" name="date" required><br /><br />
+
+    <button type="submit">Submit / जमा करें</button>
+  </form>
+</div>
       <h2 class="en">Buy Spare Parts</h2>
       <h2 class="hi" style="display:none;">स्पेयर पार्ट्स खरीदें</h2>
       <p><a href="#">Shop online for parts</a></p>
