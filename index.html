@@ -1,101 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <img src="logo.png" alt="Nation Bike Logo" style="max-height: 80px; margin-bottom: 10px;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nation Bike Spare Part & Workshop</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      line-height: 1.6;
       margin: 0;
-      padding: 20px;
-      background: #f8f8f8;
+      padding: 0;
+      color: #333;
+      background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
+      background-size: cover;
+    }
+    header {
+      background: rgba(30, 30, 30, 0.9);
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    nav {
+      background: rgba(51, 51, 51, 0.9);
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
     }
     .container {
-      max-width: 900px;
+      padding: 20px;
+      max-width: 1000px;
       margin: auto;
-      background: white;
-      padding: 30px;
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .lang-btn {
-      float: right;
-      margin-bottom: 10px;
-    }
-    h1 {
-      color: #333;
     }
     .section {
-      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    footer {
+      background: rgba(30, 30, 30, 0.9);
+      color: #fff;
+      text-align: center;
+      padding: 15px 0;
+    }
+    iframe {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .gallery img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin: 5px;
+      border-radius: 8px;
+    }
+    .lang-toggle {
+      float: right;
+      margin-right: 20px;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button class="lang-btn" onclick="toggleLang()">हिंदी / English</button>
-    
-    <div id="english">
-      <h1>Welcome to Nation Bike Spare Part & Workshop</h1>
-      <p>Your trusted partner for quality bike repairs and genuine spare parts in Bettiah.</p>
-      
-      <div class="section">
-        <h2>Our Services</h2>
-        <ul>
-          <li>Bike Servicing & Maintenance</li>
-          <li>Spare Parts Sales</li>
-          <li>Online Booking</li>
-          <li>Online Purchase</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>Contact Us</h2>
-        <p>Email: Mumtaz007alam@gmail.com</p>
-        <p>Location: Bettiah, Bihar</p>
-      </div>
+  <header>
+    <img src="logo.png" alt="Nation Bike Logo" style="max-height: 80px; margin-bottom: 10px;">
+    <h1>Nation Bike Spare Part & Workshop</h1>
+    <div class="lang-toggle">
+      <button onclick="toggleLang('en')">English</button>
+      <button onclick="toggleLang('hi')">हिंदी</button>
+    </div>
+  </header>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#booking">Booking</a>
+    <a href="#purchase">Purchase</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="container"><div class="section" id="services">
+  <h2 class="en">Our Services</h2>
+  <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
+  <ul>
+    <li>Bike Repair & Maintenance</li>
+    <li>Spare Part Sales</li>
+    <li>Custom Modification</li>
+  </ul>
 </div>
-  <div style="margin-top: 2rem;">
-  <h2 style="font-size: 1.25rem; font-weight: bold;">Find Us on Map</h2>
+
+<div class="section" id="gallery">
+  <h2 class="en">Shop Gallery</h2>
+  <h2 class="hi" style="display:none;">दुकान की गैलरी</h2>
+  <div class="gallery">
+    <img src="image1.jpg" alt="Shop Image 1">
+    <img src="image2.jpg" alt="Shop Image 2">
+  </div>
+</div>
+
+<div class="section" id="booking">
+  <h2 class="en">Book a Service</h2>
+  <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
+  <p><a href="#">Click here to book online</a></p>
+</div>
+
+<div class="section" id="purchase">
+  <h2 class="en">Buy Spare Parts</h2>
+  <h2 class="hi" style="display:none;">स्पेयर पार्ट्स खरीदें</h2>
+  <p><a href="#">Shop online for parts</a></p>
+</div>
+
+<div class="section" id="contact">
+  <h2 class="en">Contact Us</h2>
+  <h2 class="hi" style="display:none;">संपर्क करें</h2>
+  <p>Email: Mumtaz007alam@gmail.com</p>
+  <p>Location: Bettiah, Bihar</p>
+</div>
+
+<div class="section">
+  <h2 class="en">Find Us on Map</h2>
+  <h2 class="hi" style="display:none;">हमें मानचित्र पर देखें</h2>
   <iframe
     src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=es;z=14&output=embed"
-    width="100%"
     height="300"
-    style="border:0; border-radius: 12px; margin-top: 10px;"
     allowfullscreen=""
     loading="lazy"
     referrerpolicy="no-referrer-when-downgrade">
   </iframe>
-</div>  <div id="hindi" style="display:none;">
-      <h1>नेशन बाइक स्पेयर पार्ट्स और वर्कशॉप में आपका स्वागत है</h1>
-      <p>बेतिया में विश्वसनीय बाइक मरम्मत और असली स्पेयर पार्ट्स का आपका भरोसेमंद स्थान।</p>
-      
-      <div class="section">
-        <h2>हमारी सेवाएं</h2>
-        <ul>
-          <li>बाइक सर्विसिंग और मेंटेनेंस</li>
-          <li>स्पेयर पार्ट्स की बिक्री</li>
-          <li>ऑनलाइन बुकिंग</li>
-          <li>ऑनलाइन खरीदारी</li>
-        </ul>
-      </div>
+</div>
 
-      <div class="section">
-        <h2>संपर्क करें</h2>
-        <p>ईमेल: Mumtaz007alam@gmail.com</p>
-        <p>स्थान: बेतिया, बिहार</p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function toggleLang() {
-      const en = document.getElementById("english");
-      const hi = document.getElementById("hindi");
-      en.style.display = en.style.display === "none" ? "block" : "none";
-      hi.style.display = hi.style.display === "none" ? "block" : "none";
+  </div>  <footer>
+    <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
+  </footer>  <script>
+    function toggleLang(lang) {
+      document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
+      document.querySelectorAll('.hi').forEach(el => el.style.display = lang === 'hi' ? 'block' : 'none');
     }
-  </script>
-</body>
+  </script></body>
 </html>
