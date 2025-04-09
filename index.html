@@ -6,91 +6,96 @@
   <title>Nation Bike Spare Part & Workshop</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
+      color: #333;
       background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
       background-size: cover;
-      color: #222;
     }
     header {
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 20px;
+      background: rgba(0,0,0,0.85);
+      color: white;
       text-align: center;
+      padding: 20px;
     }
     header img {
-      max-height: 80px;
+      max-height: 70px;
+      margin-bottom: 10px;
     }
     nav {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(20,20,20,0.9);
       text-align: center;
       padding: 10px;
     }
     nav a {
-      color: #fff;
-      margin: 0 15px;
+      color: white;
+      margin: 0 12px;
       text-decoration: none;
       font-weight: bold;
     }
+    .lang-toggle {
+      margin-top: 10px;
+    }
+    .lang-toggle button {
+      margin: 0 5px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      background: #f90;
+      color: #fff;
+      cursor: pointer;
+    }
     .container {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255,255,255,0.95);
       margin: 20px auto;
       padding: 20px;
-      max-width: 1000px;
       border-radius: 10px;
+      max-width: 1000px;
     }
     .section {
       margin-bottom: 40px;
-    }
-    footer {
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 15px 0;
-    }
-    iframe {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
     }
     .gallery img {
       width: 100px;
       height: 100px;
       object-fit: cover;
-      margin: 5px;
       border-radius: 8px;
+      margin: 5px;
     }
-    .lang-toggle {
-      position: absolute;
-      right: 20px;
-      top: 30px;
-    }
-    .lang-toggle button {
-      margin-left: 5px;
-      padding: 5px 10px;
-      font-weight: bold;
-    }
-    form input, form select, form textarea {
+    input, select, textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      margin-bottom: 15px;
+      padding: 8px;
+      margin: 8px 0;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
-    form button {
-      padding: 10px 20px;
-      background: #222;
+    button, .btn {
+      background: #28a745;
       color: white;
       border: none;
+      padding: 10px 20px;
       border-radius: 5px;
+      cursor: pointer;
     }
-    #whatsapp {
+    footer {
+      background: rgba(0,0,0,0.85);
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+    iframe {
+      border-radius: 10px;
+    }
+    #whatsapp-chat {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      z-index: 100;
+      z-index: 1000;
+    }
+    #whatsapp-chat a img {
+      width: 60px;
+      height: 60px;
     }
   </style>
 </head>
@@ -127,35 +132,36 @@
       <h2 class="en">Shop Gallery</h2>
       <h2 class="hi" style="display:none;">दुकान की गैलरी</h2>
       <div class="gallery">
-        <img src="image1.jpg" alt="Shop Image 1">
-        <img src="image2.jpg" alt="Shop Image 2">
+        <img src="image1.jpg" alt="Shop 1">
+        <img src="image2.jpg" alt="Shop 2">
       </div>
     </div>
 
     <div class="section" id="booking">
       <h2 class="en">Book a Service</h2>
       <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
-      <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm()">
+      <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm();">
         <label>Name / नाम:</label>
         <input type="text" name="name" required>
-
+        
         <label>Phone Number / फोन नंबर:</label>
         <input type="tel" name="phone" pattern="[0-9]{10}" required>
 
-        <label>Choose Service / सेवा चुनें:</label>
+        <label>Select Service / सेवा चुनें:</label>
         <select name="service" required>
-          <option value="">Select a Service</option>
+          <option value="">--Select--</option>
           <option value="General Service">General Service</option>
           <option value="Engine Repair">Engine Repair</option>
           <option value="Oil Change">Oil Change</option>
-          <option value="Custom Modification">Custom Modification</option>
+          <option value="Brake Service">Brake Service</option>
+          <option value="Other">Other</option>
         </select>
 
-        <label>Preferred Date:</label>
-        <input type="date" name="date" id="dateInput" required>
+        <label>Appointment Date / अपॉइंटमेंट तिथि:</label>
+        <input type="date" name="date" id="datePicker" required>
 
-        <label>Description (optional):</label>
-        <textarea name="message" rows="4" placeholder="Any specific issue or request..."></textarea>
+        <label>Description / विवरण:</label>
+        <textarea name="description" rows="4" placeholder="Describe your issue..."></textarea>
 
         <button type="submit">Submit</button>
       </form>
@@ -172,9 +178,12 @@
       <h2 class="hi" style="display:none;">संपर्क करें</h2>
       <p>Email: Mumtaz007alam@gmail.com</p>
       <p>Phone: 7762934833</p>
-      <p>Location: Near Bandhan Bank, Bettiah, Bihar 845438</p>
-      <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">View on Google Map / गूगल मैप पर देखें</a></p>
-      <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" height="300" allowfullscreen="" loading="lazy"></iframe>
+      <p>Address: Near Bandhan Bank, Bettiah, Bihar 845438</p>
+      <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">
+        View on Google Map / गूगल मैप पर देखें
+      </a></p>
+      <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed"
+              width="100%" height="300" loading="lazy" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -182,9 +191,11 @@
     <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
   </footer>
 
-  <a id="whatsapp" href="https://wa.me/917762934833" target="_blank">
-    <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"/>
-  </a>
+  <div id="whatsapp-chat">
+    <a href="https://wa.me/917762934833" target="_blank">
+      <img src="https://img.icons8.com/color/96/000000/whatsapp--v1.png" alt="WhatsApp Chat">
+    </a>
+  </div>
 
   <script>
     function toggleLang(lang) {
@@ -194,24 +205,21 @@
 
     function validateForm() {
       const phone = document.querySelector('input[name="phone"]').value;
-      const phoneRegex = /^[0-9]{10}$/;
-      if (!phoneRegex.test(phone)) {
+      if (!/^\d{10}$/.test(phone)) {
         alert("Please enter a valid 10-digit phone number.");
         return false;
       }
       return true;
     }
 
+    // Set date range for appointment picker
     window.onload = function () {
-      const dateInput = document.getElementById('dateInput');
+      const dateInput = document.getElementById("datePicker");
       const today = new Date();
-      const maxDate = new Date();
-      maxDate.setDate(today.getDate() + 7);
-
-      const format = (d) => d.toISOString().split('T')[0];
-      dateInput.min = format(today);
-      dateInput.max = format(maxDate);
-    }
+      const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+      dateInput.min = today.toISOString().split("T")[0];
+      dateInput.max = nextWeek.toISOString().split("T")[0];
+    };
   </script>
 </body>
 </html>
