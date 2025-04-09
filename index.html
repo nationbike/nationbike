@@ -5,101 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nation Bike Spare Part & Workshop</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #d0eaff, #f7faff);
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom, #cceeff, #ffffff);
-      color: #333;
+      color: #222;
     }
     header {
-      background-color: #0099cc;
-      color: #fff;
       text-align: center;
+      background: #007acc;
+      color: white;
       padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2em;
+      background: linear-gradient(to right, #fff, #aaf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 1px 1px 4px #000;
     }
     nav {
-      background: #006699;
-      padding: 10px;
+      background: #004f8b;
       text-align: center;
+      padding: 10px;
     }
     nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
+      color: white;
+      margin: 0 10px;
       font-weight: bold;
+      text-decoration: none;
     }
     .container {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: auto;
       padding: 20px;
-      background: #f8faff;
+      background: white;
       border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    h2 {
-      color: #005577;
+    .section {
+      margin-bottom: 40px;
+    }
+    .section h2 {
+      color: #005b96;
       border-bottom: 2px solid #0099cc;
       padding-bottom: 5px;
     }
     .gallery img {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       margin: 5px;
-      border-radius: 10px;
+      border-radius: 5px;
       object-fit: cover;
     }
-    form input, form select, form textarea {
+    input, select, textarea {
       width: 100%;
       padding: 10px;
-      margin-bottom: 12px;
-      border-radius: 6px;
+      margin: 8px 0;
       border: 1px solid #ccc;
+      border-radius: 4px;
     }
-    button {
-      background-color: #0099cc;
+    button, .btn {
+      background: #007acc;
       color: white;
-      border: none;
       padding: 10px 20px;
-      border-radius: 6px;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
     }
-    .testimonials {
-      background: #e0f7ff;
-      padding: 15px;
-      border-radius: 8px;
-    }
-    .testimonial {
-      margin-bottom: 15px;
+    button:hover {
+      background: #005b96;
     }
     footer {
-      text-align: center;
-      background: #006699;
+      background: #004f8b;
       color: white;
-      padding: 15px 0;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+    iframe {
+      border: 0;
+      border-radius: 8px;
+    }
+    .search-bar {
+      margin: 20px 0;
+    }
+    .testimonial {
+      background: #f0f8ff;
+      padding: 15px;
+      border-left: 5px solid #0099cc;
+      margin-bottom: 15px;
     }
     .whatsapp-chat {
       position: fixed;
-      bottom: 15px;
-      right: 15px;
-      background: #25D366;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 50px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    #spareSearch {
-      padding: 10px;
-      margin-bottom: 15px;
-      width: 100%;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Nation Bike Logo" style="max-height: 80px;" />
     <h1>Nation Bike Spare Part & Workshop</h1>
     <div>
       <button onclick="toggleLang('en')">English</button>
@@ -110,121 +120,123 @@
   <nav>
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
-    <a href="#booking">Book Service</a>
-    <a href="#search">Search Parts</a>
+    <a href="#booking">Booking</a>
+    <a href="#purchase">Purchase</a>
     <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </nav>
 
   <div class="container">
-    <section id="services">
-      <h2>Our Services</h2>
+
+    <div class="section" id="services">
+      <h2 class="en">Our Services</h2>
+      <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
       <ul>
         <li>General Service</li>
         <li>Engine Repair</li>
-        <li>Oil Change</li>
-        <li>Brake & Clutch Replacement</li>
-        <li>Washing & Detailing</li>
+        <li>Oil Changes</li>
+        <li>Brake & Clutch</li>
+        <li>Wiring</li>
       </ul>
-    </section>
+    </div>
 
-    <section id="gallery">
-      <h2>Shop Gallery</h2>
+    <div class="section" id="gallery">
+      <h2 class="en">Shop Gallery</h2>
+      <h2 class="hi" style="display:none;">दुकान की गैलरी</h2>
       <div class="gallery">
-        <img src="image1.jpg" alt="Shop Image 1" />
-        <img src="image2.jpg" alt="Shop Image 2" />
+        <img src="image1.jpg" alt="Shop">
+        <img src="image2.jpg" alt="Shop">
       </div>
-    </section>
+    </div>
 
-    <section id="booking">
-      <h2>Book a Service</h2>
+    <div class="section" id="booking">
+      <h2 class="en">Book a Service</h2>
+      <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
       <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm()">
         <input type="text" name="name" placeholder="Your Name" required />
-        <input type="tel" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}" />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
         <select name="service" required>
-          <option value="">Select Service Type</option>
+          <option value="">Select Service</option>
           <option>General Service</option>
           <option>Engine Repair</option>
           <option>Oil Change</option>
-          <option>Brake Service</option>
+          <option>Wiring</option>
+          <option>Clutch & Brake</option>
         </select>
-        <input type="date" name="date" id="date" required />
+        <input type="date" name="appointment" min="" max="" required id="datePicker"/>
         <textarea name="message" placeholder="Additional Details" rows="4"></textarea>
-        <button type="submit">Book Now</button>
+        <button type="submit">Submit</button>
       </form>
-    </section>
+    </div>
 
-    <section id="search">
+    <div class="section" id="purchase">
       <h2>Search Spare Parts</h2>
-      <input list="parts" id="spareSearch" placeholder="Search for spare parts, e.g. Castrol oil, Chain set..." />
+      <input list="parts" name="partsearch" placeholder="Search spare parts..." />
       <datalist id="parts">
         <option>Engine Oil - Castrol</option>
-        <option>Engine Oil - Motul</option>
-        <option>Chain Set - Hero</option>
-        <option>Brake Pad - Bajaj</option>
+        <option>Engine Oil - Shell</option>
+        <option>Spark Plug</option>
+        <option>Clutch Plate</option>
         <option>Air Filter</option>
-        <option>Battery - Exide</option>
-        <option>Indicators</option>
-        <option>Side Mirror</option>
-        <option>Seat Cover</option>
-        <option>LED Headlight</option>
+        <option>Brake Pad</option>
+        <option>Horn</option>
+        <option>Headlight</option>
+        <option>Chain Set</option>
       </datalist>
-    </section>
+    </div>
 
-    <section id="testimonials">
+    <div class="section" id="testimonials">
       <h2>Customer Testimonials</h2>
-      <div class="testimonials">
-        <div class="testimonial">
-          <strong>Rahul S:</strong> "Quick and affordable service. Highly recommended!"
-        </div>
-        <div class="testimonial">
-          <strong>Priya K:</strong> "Very helpful staff and genuine spare parts."
-        </div>
-      </div>
-    </section>
+      <div class="testimonial">"Excellent service! My bike feels brand new." - Rakesh</div>
+      <div class="testimonial">"Affordable and fast repairs. Highly recommend." - Sunita</div>
+    </div>
 
-    <section id="contact">
+    <div class="section" id="contact">
       <h2>Contact Us</h2>
-      <p><strong>Phone:</strong> 7762934833</p>
-      <p><strong>Email:</strong> Mumtaz007alam@gmail.com</p>
-      <p><strong>Address:</strong> Near Bandhan Bank, Bettiah, Bihar 845438</p>
-      <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">Locate on Google Map</a></p>
-      <iframe
-        src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed"
-        height="300"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy">
-      </iframe>
-    </section>
-  </div>
+      <p>Email: Mumtaz007alam@gmail.com</p>
+      <p>Phone: 7762934833</p>
+      <p>Address: Near Bandhan Bank, Bettiah, Bihar 845438</p>
+      <p>
+        <a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">
+          View on Google Map / गूगल मैप पर देखें
+        </a>
+      </p>
+      <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=es;z=14&output=embed" height="300"></iframe>
+    </div>
 
-  <a class="whatsapp-chat" href="https://wa.me/917762934833" target="_blank">
-    Chat on WhatsApp
-  </a>
+  </div>
 
   <footer>
     <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
   </footer>
 
+  <a class="whatsapp-chat" href="https://wa.me/917762934833" target="_blank">
+    <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp Chat">
+  </a>
+
   <script>
     function toggleLang(lang) {
-      document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
-      document.querySelectorAll('.hi').forEach(el => el.style.display = lang === 'hi' ? 'block' : 'none');
+      document.querySelectorAll('.en').forEach(e => e.style.display = lang === 'en' ? 'block' : 'none');
+      document.querySelectorAll('.hi').forEach(e => e.style.display = lang === 'hi' ? 'block' : 'none');
     }
 
     function validateForm() {
-      const dateInput = document.getElementById("date");
-      const selectedDate = new Date(dateInput.value);
-      const today = new Date();
-      const maxDate = new Date();
-      maxDate.setDate(today.getDate() + 7);
-
-      if (selectedDate < today || selectedDate > maxDate) {
-        alert("Please select a date within the next 7 days.");
+      const phone = document.querySelector('input[name="phone"]').value;
+      if (!/^\d{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
         return false;
       }
       return true;
+    }
+
+    window.onload = function() {
+      const today = new Date();
+      const maxDate = new Date();
+      maxDate.setDate(today.getDate() + 7);
+      const minStr = today.toISOString().split('T')[0];
+      const maxStr = maxDate.toISOString().split('T')[0];
+      document.getElementById("datePicker").min = minStr;
+      document.getElementById("datePicker").max = maxStr;
     }
   </script>
 </body>
