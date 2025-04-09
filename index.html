@@ -3,107 +3,86 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nation Bike Spare Part & Workshop</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
       background-size: cover;
       color: #333;
     }
-    header {
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 20px;
+    header, footer {
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
       text-align: center;
+      padding: 1em 0;
     }
     header img {
-      max-height: 80px;
+      max-height: 70px;
     }
     nav {
-      background: #444;
-      padding: 10px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      background: #222;
+      padding: 0.5em;
     }
     nav a {
       color: white;
-      margin: 0 10px;
+      margin: 0 1em;
       text-decoration: none;
       font-weight: bold;
     }
     .container {
       max-width: 1200px;
       margin: auto;
-      padding: 20px;
       background: rgba(255, 255, 255, 0.95);
+      padding: 2em;
       border-radius: 10px;
     }
-    h2 {
-      font-family: 'Rajdhani', sans-serif;
-      color: #c0392b;
-      margin-bottom: 10px;
-    }
-    .service-card {
-      background: #f1f1f1;
-      padding: 15px;
-      border-radius: 10px;
-      margin: 10px 0;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    .section {
+      margin-bottom: 3em;
     }
     .gallery img {
       width: 100px;
       margin: 5px;
-      border-radius: 8px;
-    }
-    .search-section input {
-      padding: 10px;
-      width: 100%;
-      border: 1px solid #aaa;
-      margin-bottom: 15px;
-    }
-    .search-suggestions {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .search-suggestions li {
-      background: #eee;
-      padding: 5px 10px;
-      margin-bottom: 5px;
       border-radius: 5px;
-    }
-    footer {
-      background: rgba(0,0,0,0.8);
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      margin-top: 20px;
-    }
-    .lang-toggle button {
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      margin: 5px;
-      border-radius: 5px;
-      cursor: pointer;
     }
     iframe {
       width: 100%;
-      border-radius: 10px;
+      height: 300px;
+      border: none;
+      border-radius: 8px;
     }
-    label {
-      display: block;
-      margin-top: 10px;
+    .testimonial {
+      background: #f1f1f1;
+      padding: 1em;
+      margin: 1em 0;
+      border-left: 5px solid #2196F3;
     }
-    input, select, textarea {
+    .whatsapp-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .login-section input, .login-section button {
+      padding: 10px;
+      margin: 5px 0;
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    }
+    .service-card {
+      background: #f9f9f9;
+      padding: 1em;
+      border-radius: 8px;
+      margin: 1em 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -111,128 +90,103 @@
   <header>
     <img src="logo.png" alt="Nation Bike Logo">
     <h1>Nation Bike Spare Part & Workshop</h1>
-    <div class="lang-toggle">
-      <button onclick="toggleLang('en')">English</button>
-      <button onclick="toggleLang('hi')">हिंदी</button>
-    </div>
-  </header>
-  <nav>
+  </header>  <nav>
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
     <a href="#booking">Booking</a>
     <a href="#purchase">Purchase</a>
-    <a href="#search">Search</a>
     <a href="#contact">Contact</a>
-  </nav>
-  <div class="container">
-    <section id="services">
-      <h2 class="en">Our Services</h2>
-      <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
+    <a href="#login">Login</a>
+  </nav>  <div class="container">
+    <div class="section" id="services">
+      <h2>Our Services</h2>
       <div class="service-card">General Service</div>
       <div class="service-card">Engine Repair</div>
-      <div class="service-card">Oil Change</div>
-    </section><section id="gallery">
-  <h2 class="en">Gallery</h2>
-  <h2 class="hi" style="display:none;">गैलरी</h2>
+      <div class="service-card">Oil Change - Castrol, Motul, etc.</div>
+    </div><div class="section" id="gallery">
+  <h2>Gallery</h2>
   <div class="gallery">
-    <img src="image1.jpg" alt="Gallery 1">
-    <img src="image2.jpg" alt="Gallery 2">
+    <img src="image1.jpg" alt="Image 1">
+    <img src="image2.jpg" alt="Image 2">
   </div>
-</section>
+</div>
 
-<section id="booking">
-  <h2 class="en">Book a Service</h2>
-  <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
-  <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm()">
+<div class="section" id="booking">
+  <h2>Book a Service</h2>
+  <form action="https://formspree.io/f/xqapgvol" method="POST">
     <label>Full Name:</label>
     <input type="text" name="name" required>
     <label>Phone Number:</label>
     <input type="tel" name="phone" pattern="[0-9]{10}" required>
-    <label>Select Service:</label>
+    <label>Service Type:</label>
     <select name="service">
-      <option value="General Service">General Service</option>
-      <option value="Engine Repair">Engine Repair</option>
-      <option value="Oil Change">Oil Change</option>
+      <option>General Service</option>
+      <option>Engine Repair</option>
+      <option>Oil Change</option>
     </select>
-    <label>Appointment Date:</label>
-    <input type="date" name="date" id="datePicker" required>
-    <label>Additional Notes:</label>
-    <textarea name="notes"></textarea>
-    <button type="submit">Submit</button>
+    <label>Preferred Date:</label>
+    <input type="date" name="date" min="" max="">
+    <label>Description:</label>
+    <textarea name="description" rows="4"></textarea>
+    <button type="submit">Book Now</button>
   </form>
-</section>
+</div>
 
-<section id="purchase">
-  <h2>Buy Spare Parts</h2>
-  <p><a href="#">Shop online for genuine parts</a></p>
-</section>
-
-<section id="search" class="search-section">
+<div class="section" id="purchase">
   <h2>Search Spare Parts</h2>
-  <input type="text" id="searchInput" placeholder="Search parts...">
-  <ul class="search-suggestions" id="suggestions"></ul>
-</section>
+  <input type="text" id="searchBar" placeholder="Search..." list="partsList">
+  <datalist id="partsList">
+    <option>Engine Oil - Castrol</option>
+    <option>Engine Oil - Motul</option>
+    <option>Air Filter</option>
+    <option>Brake Pad</option>
+    <option>Chain Lubricant</option>
+  </datalist>
+</div>
 
-<section id="contact">
-  <h2>Contact Us</h2>
+<div class="section" id="contact">
+  <h2>Contact</h2>
   <p>Email: Mumtaz007alam@gmail.com</p>
   <p>Phone: 7762934833</p>
-  <p>Address: Near Bandhan Bank, Bettiah, Bihar 845438</p>
-  <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">View on Google Map / गूगल मैप पर देखें</a></p>
-  <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" height="300"></iframe>
-</section>
+  <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">Locate us on Map</a></p>
+  <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=es;z=14&output=embed"></iframe>
+</div>
 
-  </div>  <footer>
+<div class="section" id="login">
+  <h2>Customer Login</h2>
+  <div class="login-section">
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Feedback</h2>
+  <form>
+    <label>Your Feedback:</label>
+    <textarea rows="4" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<div class="section">
+  <h2>Customer Testimonials</h2>
+  <div class="testimonial">"Great service! My bike runs like new!" – Ravi</div>
+  <div class="testimonial">"Affordable prices and quality parts." – Suman</div>
+</div>
+
+  </div>  <a href="https://wa.me/917762934833" class="whatsapp-chat" target="_blank">
+    <i class="fab fa-whatsapp"></i> Chat with us
+  </a>  <footer>
     <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
   </footer>  <script>
-    function toggleLang(lang) {
-      document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
-      document.querySelectorAll('.hi').forEach(el => el.style.display = lang === 'hi' ? 'block' : 'none');
-    }
-
-    function validateForm() {
-      const dateInput = document.getElementById('datePicker');
-      const selectedDate = new Date(dateInput.value);
-      const today = new Date();
-      const maxDate = new Date();
-      maxDate.setDate(today.getDate() + 7);
-      if (selectedDate < today || selectedDate > maxDate) {
-        alert("Please select a date within the next 7 days.");
-        return false;
-      }
-      return true;
-    }
-
-    const searchItems = [
-      'Engine Oil - Castrol', 'Engine Oil - Motul', 'Chain Lubricant', 'Air Filter', 'Clutch Wire', 'Spark Plug', 'Brake Pad', 'Indicator', 'Headlight', 'Tyre 2.75-18', 'Bike Battery', 'Helmet', 'Tool Kit', 'Number Plate Frame'
-    ];
-
-    const input = document.getElementById("searchInput");
-    const suggestions = document.getElementById("suggestions");
-
-    input.addEventListener("input", function() {
-      const val = this.value.toLowerCase();
-      suggestions.innerHTML = "";
-      if (val) {
-        const filtered = searchItems.filter(item => item.toLowerCase().includes(val));
-        filtered.forEach(item => {
-          const li = document.createElement("li");
-          li.textContent = item;
-          suggestions.appendChild(li);
-        });
-      }
-    });
-  </script>  <!-- WhatsApp Chat -->  <script>
-    (function () {
-      var options = {
-        whatsapp: "7762934833",
-        call_to_action: "Message us",
-        position: "right"
-      };
-      var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
-      var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
-      s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
-      document.getElementsByTagName('head')[0].appendChild(s);
-    })();
+    // Limit date input to 7 days from today
+    const dateInput = document.querySelector('input[type="date"]');
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + 7);
+    dateInput.min = today.toISOString().split('T')[0];
+    dateInput.max = maxDate.toISOString().split('T')[0];
   </script></body>
 </html>
