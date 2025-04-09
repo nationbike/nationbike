@@ -6,137 +6,111 @@
   <title>Nation Bike Spare Part & Workshop</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
       background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
       background-size: cover;
-      color: #333;
+      color: #222;
     }
-
     header {
-      background: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0,0,0,0.85);
       color: #fff;
-      padding: 20px 0;
       text-align: center;
-      position: relative;
+      padding: 20px;
     }
-
     header img {
-      max-height: 70px;
-      margin-bottom: 10px;
+      height: 80px;
     }
-
     nav {
-      background: #333;
+      background-color: #222;
       text-align: center;
       padding: 10px;
     }
-
     nav a {
-      color: #fff;
+      color: white;
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
     }
-
     .container {
       max-width: 1000px;
       margin: 20px auto;
       padding: 20px;
-      background: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255,255,255,0.95);
       border-radius: 10px;
     }
-
     .section {
       margin-bottom: 40px;
     }
-
-    .section h2 {
-      color: #c0392b;
-      font-size: 24px;
-      border-bottom: 2px solid #c0392b;
-      padding-bottom: 5px;
+    h2 {
+      border-bottom: 2px solid #0066cc;
+      color: #0066cc;
     }
-
-    .service-cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .service-card {
-      flex: 1 1 30%;
-      background: #f4f4f4;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
     .gallery img {
-      width: 100px;
       height: 100px;
-      object-fit: cover;
+      width: 100px;
       margin: 5px;
       border-radius: 8px;
+      object-fit: cover;
     }
-
-    form input, form select, form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    form button {
-      padding: 10px 20px;
-      background: #27ae60;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-
-    iframe {
-      width: 100%;
-      border-radius: 10px;
-      height: 300px;
-    }
-
     footer {
-      background: rgba(0, 0, 0, 0.8);
+      background-color: #111;
       color: white;
       text-align: center;
-      padding: 15px 0;
+      padding: 15px;
     }
-
     .lang-toggle {
       position: absolute;
-      top: 10px;
+      top: 20px;
       right: 20px;
     }
-
     .lang-toggle button {
-      margin-left: 10px;
-      padding: 5px 10px;
+      margin-left: 5px;
     }
-
-    .whatsapp-float {
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .search-part {
+      margin-bottom: 20px;
+    }
+    iframe {
+      border: 0;
+      border-radius: 10px;
+    }
+    .service-card {
+      background: #f0f8ff;
+      border: 1px solid #cce;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+    .whatsapp-chat {
       position: fixed;
-      bottom: 15px;
-      right: 15px;
-      z-index: 1000;
-    }
-
-    .whatsapp-float img {
-      width: 50px;
+      bottom: 20px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
-
   <header>
     <img src="logo.png" alt="Nation Bike Logo">
     <h1>Nation Bike Spare Part & Workshop</h1>
@@ -145,28 +119,23 @@
       <button onclick="toggleLang('hi')">हिंदी</button>
     </div>
   </header>
-
   <nav>
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
-    <a href="#booking">Booking</a>
+    <a href="#booking">Book Service</a>
     <a href="#purchase">Purchase</a>
     <a href="#contact">Contact</a>
   </nav>
 
   <div class="container">
-
     <div class="section" id="services">
       <h2 class="en">Our Services</h2>
       <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
-      <div class="service-cards">
-        <div class="service-card">General Service</div>
-        <div class="service-card">Engine Repair</div>
-        <div class="service-card">Oil Change</div>
-        <div class="service-card">Brake Service</div>
-        <div class="service-card">Battery Check</div>
-        <div class="service-card">Wheel Alignment</div>
-      </div>
+      <div class="service-card">General Service</div>
+      <div class="service-card">Engine Repair</div>
+      <div class="service-card">Oil Change</div>
+      <div class="service-card">Battery Check</div>
+      <div class="service-card">Spare Part Sales</div>
     </div>
 
     <div class="section" id="gallery">
@@ -178,30 +147,35 @@
       </div>
     </div>
 
+    <div class="section search-part">
+      <h2>Search Spare Parts</h2>
+      <input type="text" placeholder="Search parts...">
+    </div>
+
     <div class="section" id="booking">
       <h2 class="en">Book a Service</h2>
       <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
       <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm()">
-        <label>Full Name / पूरा नाम:</label>
+        <label>Name:</label>
         <input type="text" name="name" required>
-        
-        <label>Phone Number / फ़ोन नंबर:</label>
-        <input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="10-digit number">
 
-        <label>Service Type / सेवा प्रकार:</label>
+        <label>Phone:</label>
+        <input type="tel" name="phone" pattern="[0-9]{10}" required>
+
+        <label>Choose Service:</label>
         <select name="service" required>
-          <option value="">-- Select Service --</option>
-          <option value="General Service">General Service</option>
-          <option value="Engine Repair">Engine Repair</option>
-          <option value="Oil Change">Oil Change</option>
-          <option value="Brake Service">Brake Service</option>
+          <option value="">Select</option>
+          <option>General Service</option>
+          <option>Engine Repair</option>
+          <option>Oil Change</option>
+          <option>Battery Check</option>
         </select>
 
-        <label>Appointment Date / नियुक्ति की तारीख:</label>
-        <input type="date" name="date" id="apptDate" required>
+        <label>Date:</label>
+        <input type="date" name="date" id="dateInput" required>
 
-        <label>Description / विवरण:</label>
-        <textarea name="message" rows="3" placeholder="Describe your issue..."></textarea>
+        <label>Description (optional):</label>
+        <textarea name="message" placeholder="Details about the service..."></textarea>
 
         <button type="submit">Submit</button>
       </form>
@@ -210,7 +184,7 @@
     <div class="section" id="purchase">
       <h2 class="en">Buy Spare Parts</h2>
       <h2 class="hi" style="display:none;">स्पेयर पार्ट्स खरीदें</h2>
-      <p>Coming soon...</p>
+      <p><a href="#">Shop online for parts</a></p>
     </div>
 
     <div class="section" id="contact">
@@ -218,14 +192,10 @@
       <h2 class="hi" style="display:none;">संपर्क करें</h2>
       <p>Email: Mumtaz007alam@gmail.com</p>
       <p>Phone: 7762934833</p>
-      <p>Address / पता: Near Bandhan Bank, Bettiah, Bihar 845438</p>
+      <p>Address: Near Bandhan Bank, Bettiah, Bihar 845438</p>
       <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">View on Google Map / गूगल मैप पर देखें</a></p>
-    </div>
-
-    <div class="section">
-      <h2 class="en">Find Us on Map</h2>
-      <h2 class="hi" style="display:none;">हमें मानचित्र पर देखें</h2>
-      <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" allowfullscreen="" loading="lazy"></iframe>
+      <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed"
+              height="300" loading="lazy"></iframe>
     </div>
   </div>
 
@@ -233,14 +203,12 @@
     <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
   </footer>
 
-  <a href="https://wa.me/917762934833" class="whatsapp-float" target="_blank">
-    <img src="https://web.whatsapp.com/img/favicon/1x/favicon.png" alt="Chat on WhatsApp">
-  </a>
+  <a href="https://wa.me/917762934833" target="_blank" class="whatsapp-chat">Chat on WhatsApp</a>
 
   <script>
     function toggleLang(lang) {
-      document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
-      document.querySelectorAll('.hi').forEach(el => el.style.display = lang === 'hi' ? 'block' : 'none');
+      document.querySelectorAll('.en').forEach(e => e.style.display = lang === 'en' ? 'block' : 'none');
+      document.querySelectorAll('.hi').forEach(e => e.style.display = lang === 'hi' ? 'block' : 'none');
     }
 
     function validateForm() {
@@ -252,14 +220,13 @@
       return true;
     }
 
-    // Set date range: today to 7 days later
-    const today = new Date().toISOString().split('T')[0];
+    // Limit date to today + 7 days
+    const dateInput = document.getElementById("dateInput");
+    const today = new Date();
     const maxDate = new Date();
-    maxDate.setDate(maxDate.getDate() + 7);
-    const max = maxDate.toISOString().split('T')[0];
-    document.getElementById("apptDate").setAttribute("min", today);
-    document.getElementById("apptDate").setAttribute("max", max);
+    maxDate.setDate(today.getDate() + 7);
+    dateInput.min = today.toISOString().split("T")[0];
+    dateInput.max = maxDate.toISOString().split("T")[0];
   </script>
-
 </body>
 </html>
