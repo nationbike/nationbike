@@ -6,27 +6,6 @@
   <title>Nation Bike Spare Part & Workshop</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    #cartSidebar {
-  position: fixed;
-  top: 100px;
-  right: 0;
-  width: 300px;
-  background: #f5faff;
-  border-left: 2px solid #007acc;
-  padding: 15px;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-  z-index: 999;
-  height: 80%;
-  overflow-y: auto;
-}
-#cartSidebar h3 {
-  margin-top: 0;
-}
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
-}
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
@@ -99,15 +78,6 @@
       border-radius: 8px;
       cursor: pointer;
     }
-    .cart-section {
-      margin-top: 20px;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px;
-      border-bottom: 1px solid #ccc;
-    }
     .search-button:hover {
       background-color: #005f99;
     }
@@ -125,7 +95,6 @@
   <a href="#register">Register</a>
   <a href="#login">Login</a>
   <a href="#dashboard">Dashboard</a>
-  <a href="#cart">Cart</a>
   <a href="#contact">Contact</a>
 </nav>
 
@@ -138,18 +107,9 @@
 <section id="search" class="section">
   <h2>Search Spare Parts</h2>
   <div class="search-container">
-    <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, etc...">
+    <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, Castrol 10W40, etc...">
     <button class="search-button"><i class="fas fa-search"></i></button>
   </div>
-</section>
-
-<!-- Cart Section -->
-<div id="cartSidebar">
-  <h3>Your Cart</h3>
-  <div id="cartItems"></div>
-  <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
-</div>
-  <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
 </section>
 
 <!-- Booking Section -->
@@ -167,12 +127,21 @@
       <option>Brake Check</option>
       <option>Other</option>
     </select>
-    <textarea name="description" placeholder="Describe your issue (optional)"></textarea>
+    <textarea name="description" placeholder="Describe your issue or request (optional)"></textarea>
     <label>Choose Appointment Date</label>
-    <input type="date" name="date" id="appointmentDate" required>
+    <input type="date" name="date" min="" max="" required id="appointmentDate">
     <button class="button-primary" type="submit">Submit Booking</button>
   </form>
 </section>
+
+<script>
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 7);
+  const formatDate = d => d.toISOString().split("T")[0];
+  document.getElementById("appointmentDate").min = formatDate(today);
+  document.getElementById("appointmentDate").max = formatDate(maxDate);
+</script>
 
 <!-- Testimonials -->
 <section id="testimonials" class="section">
@@ -213,14 +182,6 @@
   <button onclick="logout()" class="button-primary">Logout</button>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="section">
-  <h2>Contact Us</h2>
-  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
-  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
-  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
-</section>
-
 <!-- WhatsApp Chat -->
 <script>
   window.onload = function () {
@@ -233,7 +194,7 @@
   };
 </script>
 
-<!-- Firebase SDK -->
+<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
@@ -259,7 +220,12 @@
     const password = document.getElementById("regPassword").value;
 
     auth.createUserWithEmailAndPassword(email, password).then(user => {
-      db.collection("users").doc(user.user.uid).set({ name, email, phone, history: [] });
+      db.collection("users").doc(user.user.uid).set({
+        name: name,
+        email: email,
+        phone: phone,
+        history: []
+      });
       alert("Registration successful!");
     }).catch(error => alert(error.message));
   });
@@ -287,52 +253,71 @@
       document.getElementById("userName").innerText = data.name;
       document.getElementById("userEmail").innerText = data.email;
       document.getElementById("userPhone").innerText = data.phone;
-      document.getElementById("serviceHistory").innerHTML = (data.history || []).map(h => `<li>${h}</li>`).join('');
+      const history = data.history || [];
+      document.getElementById("serviceHistory").innerHTML = history.map(h => `<li>${h}</li>`).join('');
       document.getElementById("dashboard").style.display = "block";
     });
   }
 </script>
 
-<!-- Cart & Search Suggestions -->
+<!-- Search Functionality -->
 <script>
   const spareParts = [
-    { name: "Engine Oil", price: 300 },
-    { name: "Brake Pads", price: 200 },
-    { name: "Castrol 10W40", price: 350 },
-    { name: "Spark Plug", price: 150 },
-    { name: "Air Filter", price: 180 },
-    { name: "Chain Sprocket", price: 700 },
-    { name: "Battery", price: 1200 }
+    "Engine Oil", "Brake Pads", "Castrol 10W40", "Spark Plug", "Air Filter",
+    "Chain Sprocket", "Disc Brake", "Clutch Cable", "Headlight Bulb", "Indicator",
+    "Battery", "Tyre", "Fuel Pump", "Oil Filter", "Yamaha Lube", "Honda Genuine Oil"
   ];
-  let cart = [];
 
   const input = document.getElementById("partSearch");
   const searchBtn = document.querySelector(".search-button");
-  const cartItems = document.getElementById("cartItems");
-  const cartTotal = document.getElementById("cartTotal");
 
-  searchBtn.addEventListener("click", () => {
-    const value = input.value.toLowerCase().trim();
-    const match = spareParts.find(p => p.name.toLowerCase() === value);
-    if (match) {
-      cart.push(match);
-      updateCart();
-      alert(`${match.name} added to cart!`);
-    } else {
-      alert("Item not found.");
+  input.addEventListener("input", () => {
+    const value = input.value.toLowerCase();
+    const suggestions = spareParts.filter(part => part.toLowerCase().includes(value));
+    let suggestionHTML = "";
+    if (value && suggestions.length) {
+      suggestionHTML = suggestions.map(s => `<div class="suggestion-item">${s}</div>`).join("");
     }
+    showSuggestions(suggestionHTML);
   });
 
-  function updateCart() {
-    cartItems.innerHTML = cart.map(item => `<div class="cart-item"><span>${item.name}</span><span>₹${item.price}</span></div>`).join('');
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    cartTotal.innerText = total;
+  function showSuggestions(html) {
+    let box = document.getElementById("suggestionBox");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "suggestionBox";
+      box.style = "background: #fff; border: 1px solid #ccc; border-radius: 8px; position: absolute; width: calc(100% - 60px); max-height: 150px; overflow-y: auto; z-index: 1000;";
+      input.parentNode.appendChild(box);
+    }
+    box.innerHTML = html;
+    document.querySelectorAll(".suggestion-item").forEach(item => {
+      item.style.padding = "10px";
+      item.style.cursor = "pointer";
+      item.addEventListener("click", () => {
+        input.value = item.textContent;
+        box.innerHTML = "";
+      });
+    });
   }
 
-  const today = new Date();
-  const formatDate = d => d.toISOString().split("T")[0];
-  document.getElementById("appointmentDate").min = formatDate(today);
+  searchBtn.addEventListener("click", () => {
+    const query = input.value.trim().toLowerCase();
+    const found = spareParts.find(p => p.toLowerCase() === query);
+    if (found) {
+      alert(`"${found}" is available!`);
+    } else {
+      alert("Part not found. Please check spelling or try another keyword.");
+    }
+  });
 </script>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
+  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
+  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
+</section>
 
 </body>
 </html>
