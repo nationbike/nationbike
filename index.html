@@ -1,149 +1,205 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html><html lang="en">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nation Bike Spare Part & Workshop</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom, #e0f7ff, #ffffff);
       margin: 0;
       padding: 0;
-    }header {
-  background-color: #0288d1;
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-}
-
-header h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px #004c75;
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  background-color: #01579b;
-  padding: 10px;
-  flex-wrap: wrap;
-}
-
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
-.section {
-  margin-bottom: 40px;
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.section h2 {
-  color: #0288d1;
-  border-bottom: 2px solid #0288d1;
-  padding-bottom: 5px;
-}
-
-footer {
-  background-color: #0288d1;
-  color: white;
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 30px;
-}
-
-.dashboard-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #f1faff;
-  border: 1px solid #b3e5fc;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.card h3 {
-  color: #0277bd;
-  margin-bottom: 10px;
-}
-
-.card p {
-  margin: 5px 0;
-}
-
+      color: #222;
+      background: linear-gradient(to bottom, #e0f7ff, #ffffff);
+    }
+    header {
+      background: #007acc;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-size: 2rem;
+      letter-spacing: 1px;
+      margin: 10px 0;
+    }
+    nav {
+      background: #005f99;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 10px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .testimonial, .service-card, .search-section, .booking-form {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .search-section input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    iframe {
+      width: 100%;
+      border-radius: 10px;
+    }
+    footer {
+      background: #007acc;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+    .lang-toggle {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+    .lang-toggle button {
+      background: white;
+      color: #007acc;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    .dashboard, .login, .register, .profile {
+      display: none;
+    }
   </style>
-</head><body>
+</head>
+<body>
   <header>
     <h1>Nation Bike Spare Part & Workshop</h1>
-  </header>
-  <nav>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#users">Users</a>
+    <div class="lang-toggle">
+      <button onclick="toggleLang('en')">English</button>
+      <button onclick="toggleLang('hi')">हिंदी</button>
+    </div>
+  </header>  <nav>
     <a href="#services">Services</a>
-    <a href="#parts">Spare Parts</a>
-    <a href="#feedback">Feedback</a>
-  </nav>  <div class="container">
-    <section id="dashboard" class="section">
-      <h2>Admin Dashboard Overview</h2>
-      <div class="dashboard-section">
-        <div class="card">
-          <h3>Total Users</h3>
-          <p>150</p>
-        </div>
-        <div class="card">
-          <h3>Bookings Today</h3>
-          <p>25</p>
-        </div>
-        <div class="card">
-          <h3>Active Services</h3>
-          <p>12</p>
-        </div>
-        <div class="card">
-          <h3>Low Stock Parts</h3>
-          <p>4 items</p>
-        </div>
-      </div>
-    </section><section id="users" class="section">
-  <h2>User Management</h2>
-  <p>List of registered users, profiles, roles, and actions to manage.</p>
+    <a href="#booking">Book Service</a>
+    <a href="#purchase">Purchase Parts</a>
+    <a href="#search">Search</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+    <a href="#dashboard">Dashboard</a>
+  </nav>  <div class="container"><section id="services">
+  <h2>Our Services</h2>
+  <div class="service-card">General Checkup</div>
+  <div class="service-card">Engine Repair</div>
+  <div class="service-card">Oil Change - Castrol, Motul</div>
 </section>
 
-<section id="services" class="section">
-  <h2>Service Bookings</h2>
-  <p>Track appointments, service requests, and current job status.</p>
+<section id="booking">
+  <h2>Book a Service</h2>
+  <form class="booking-form" action="https://formspree.io/f/xqapgvol" method="POST">
+    <label>Full Name:</label><br>
+    <input type="text" name="name" required><br>
+    <label>Phone Number:</label><br>
+    <input type="tel" name="phone" required><br>
+    <label>Service Type:</label><br>
+    <select name="service">
+      <option>General Service</option>
+      <option>Engine Repair</option>
+      <option>Oil Change</option>
+    </select><br>
+    <label>Date:</label><br>
+    <input type="date" name="date" min="" max="" required><br>
+    <label>Description:</label><br>
+    <textarea name="description" required></textarea><br>
+    <button type="submit">Submit</button>
+  </form>
 </section>
 
-<section id="parts" class="section">
-  <h2>Spare Parts Inventory</h2>
-  <p>Monitor stock, add new items, update prices and availability.</p>
+<section id="purchase">
+  <h2>Purchase Spare Parts</h2>
+  <p>Online cart and checkout coming soon.</p>
 </section>
 
-<section id="feedback" class="section">
-  <h2>Customer Feedback</h2>
-  <p>Read and manage customer reviews and testimonials.</p>
+<section id="search" class="search-section">
+  <h2>Search Spare Parts</h2>
+  <input type="text" id="searchBar" placeholder="Search (e.g. Engine Oil - Castrol, Chain, Air Filter...)" onkeyup="suggestParts()">
+  <ul id="suggestions"></ul>
 </section>
+
+<section id="testimonials">
+  <h2>Customer Testimonials</h2>
+  <div class="testimonial">“Great service and fast response!” - Rahul</div>
+  <div class="testimonial">“Found all spare parts easily.” - Neha</div>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: Mumtaz007alam@gmail.com</p>
+  <p>Phone: 7762934833</p>
+  <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">Locate on Map</a></p>
+  <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" height="300"></iframe>
+</section>
+
+<section id="dashboard">
+  <h2>User Dashboard</h2>
+  <p>Welcome, <strong>User</strong>!</p>
+  <div>Past Bookings:</div>
+  <ul>
+    <li>General Service - 2025-04-01</li>
+    <li>Oil Change - 2025-03-25</li>
+  </ul>
+</section>
+
+<div id="whatsapp">
+  <a href="https://wa.me/917762934833" target="_blank">
+    <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="Chat with us" />
+  </a>
+</div>
 
   </div>  <footer>
-    <p>&copy; 2025 Nation Bike Spare Part & Workshop. Admin Panel</p>
-  </footer>
-</body></html>
+    &copy; 2025 Nation Bike Spare Part & Workshop. All rights reserved.
+  </footer>  <script>
+    function toggleLang(lang) {
+      // You can enhance this for dynamic language change
+      alert("Language switch feature coming soon!");
+    }
+
+    function suggestParts() {
+      const input = document.getElementById('searchBar').value.toLowerCase();
+      const suggestions = [
+        "engine oil - castrol", "engine oil - motul", "chain", "air filter", "spark plug",
+        "brake pad", "clutch plate", "handle grip", "mirror", "battery"
+      ];
+      const list = document.getElementById('suggestions');
+      list.innerHTML = '';
+      suggestions.forEach(item => {
+        if (item.includes(input) && input.length > 0) {
+          const li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        }
+      });
+    }
+
+    const dateInput = document.querySelector('input[type="date"]');
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + 7);
+    dateInput.min = today.toISOString().split('T')[0];
+    dateInput.max = maxDate.toISOString().split('T')[0];
+  </script></body>
+</html>
