@@ -6,6 +6,27 @@
   <title>Nation Bike Spare Part & Workshop</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
+    #cartSidebar {
+  position: fixed;
+  top: 100px;
+  right: 0;
+  width: 300px;
+  background: #f5faff;
+  border-left: 2px solid #007acc;
+  padding: 15px;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  z-index: 999;
+  height: 80%;
+  overflow-y: auto;
+}
+#cartSidebar h3 {
+  margin-top: 0;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
@@ -123,9 +144,11 @@
 </section>
 
 <!-- Cart Section -->
-<section id="cart" class="section">
-  <h2>Your Cart</h2>
+<div id="cartSidebar">
+  <h3>Your Cart</h3>
   <div id="cartItems"></div>
+  <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
+</div>
   <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
 </section>
 
