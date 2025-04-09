@@ -62,6 +62,7 @@
       background-color: #005f99;
     }
     .search-container {
+      position: relative;
       display: flex;
       gap: 10px;
       align-items: center;
@@ -259,7 +260,58 @@
   }
 </script>
 
-<!-- Contact Section (Bottom of page) -->
+<!-- Search Functionality -->
+<script>
+  const spareParts = [
+    "Engine Oil", "Brake Pads", "Castrol 10W40", "Spark Plug", "Air Filter",
+    "Chain Sprocket", "Disc Brake", "Clutch Cable", "Headlight Bulb", "Indicator",
+    "Battery", "Tyre", "Fuel Pump", "Oil Filter", "Yamaha Lube", "Honda Genuine Oil"
+  ];
+
+  const input = document.getElementById("partSearch");
+  const searchBtn = document.querySelector(".search-button");
+
+  input.addEventListener("input", () => {
+    const value = input.value.toLowerCase();
+    const suggestions = spareParts.filter(part => part.toLowerCase().includes(value));
+    let suggestionHTML = "";
+    if (value && suggestions.length) {
+      suggestionHTML = suggestions.map(s => `<div class="suggestion-item">${s}</div>`).join("");
+    }
+    showSuggestions(suggestionHTML);
+  });
+
+  function showSuggestions(html) {
+    let box = document.getElementById("suggestionBox");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "suggestionBox";
+      box.style = "background: #fff; border: 1px solid #ccc; border-radius: 8px; position: absolute; width: calc(100% - 60px); max-height: 150px; overflow-y: auto; z-index: 1000;";
+      input.parentNode.appendChild(box);
+    }
+    box.innerHTML = html;
+    document.querySelectorAll(".suggestion-item").forEach(item => {
+      item.style.padding = "10px";
+      item.style.cursor = "pointer";
+      item.addEventListener("click", () => {
+        input.value = item.textContent;
+        box.innerHTML = "";
+      });
+    });
+  }
+
+  searchBtn.addEventListener("click", () => {
+    const query = input.value.trim().toLowerCase();
+    const found = spareParts.find(p => p.toLowerCase() === query);
+    if (found) {
+      alert(`"${found}" is available!`);
+    } else {
+      alert("Part not found. Please check spelling or try another keyword.");
+    }
+  });
+</script>
+
+<!-- Contact Section -->
 <section id="contact" class="section">
   <h2>Contact Us</h2>
   <p>Phone: <a href="tel:7762934833">7762934833</a></p>
