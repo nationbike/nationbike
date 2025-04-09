@@ -4,222 +4,261 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nation Bike Spare Part & Workshop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #e0f7ff, #cce7ff);
-      color: #333;
+      background: linear-gradient(to right, #cfefff, #e6f7ff);
+      color: #222;
     }
     header {
-      background: #007acc;
-      color: #fff;
+      background: #0099cc;
+      color: white;
+      padding: 20px;
       text-align: center;
-      padding: 20px 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-      font-family: 'Trebuchet MS', sans-serif;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 26px;
       letter-spacing: 1px;
+      text-shadow: 1px 1px 3px #333;
     }
     nav {
-      background: #005f99;
+      background: #0077aa;
       padding: 10px;
       text-align: center;
     }
     nav a {
       color: white;
-      margin: 0 15px;
       text-decoration: none;
+      margin: 0 12px;
       font-weight: bold;
     }
     .container {
       max-width: 1000px;
-      margin: auto;
+      margin: 20px auto;
+      background: white;
       padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-    .section {
-      margin: 40px 0;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    section {
+      margin-bottom: 40px;
     }
     h2 {
-      color: #005f99;
-      font-family: 'Verdana', sans-serif;
+      color: #0077aa;
+      border-bottom: 2px solid #0099cc;
+      padding-bottom: 5px;
     }
-    footer {
-      background: #007acc;
-      color: #fff;
-      text-align: center;
-      padding: 10px;
+    .gallery img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin: 5px;
+      border-radius: 8px;
     }
     input, select, textarea {
       width: 100%;
-      padding: 8px;
-      margin: 5px 0 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
     }
     button {
-      background: #007acc;
-      color: #fff;
+      background: #0099cc;
+      color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 16px;
       border-radius: 6px;
       cursor: pointer;
     }
-    .dashboard {
-      background: #f0f8ff;
-      padding: 20px;
-      border-radius: 10px;
+    footer {
+      text-align: center;
+      background: #0077aa;
+      color: white;
+      padding: 15px 0;
+      margin-top: 20px;
+    }
+    .testimonial {
+      border-left: 4px solid #0099cc;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+    .lang-toggle, .search-part {
+      float: right;
+      margin-right: 10px;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Nation Bike Spare Part & Workshop</h1>
-</header>
+  <header>
+    Nation Bike Spare Part & Workshop
+  </header>
 
-<nav>
-  <a href="#services">Services</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#booking">Booking</a>
-  <a href="#purchase">Purchase</a>
-  <a href="#contact">Contact</a>
-  <a href="#customer">Customer Area</a>
-</nav>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#booking">Book</a>
+    <a href="#purchase">Purchase</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+    <a href="#dashboard">Dashboard</a>
+  </nav>
 
-<div class="container">
-  <div class="section" id="services">
-    <h2>Our Services</h2>
-    <ul>
-      <li>General Service</li>
-      <li>Engine Repair</li>
-      <li>Oil Changes</li>
-    </ul>
-  </div>
+  <div class="container">
 
-  <div class="section" id="booking">
-    <h2>Book a Service</h2>
-    <form action="https://formspree.io/f/xqapgvol" method="POST">
-      <label>Name</label>
-      <input type="text" name="name" required>
-      <label>Phone Number</label>
-      <input type="tel" name="phone" required>
-      <label>Service Type</label>
-      <select name="service">
-        <option>General Service</option>
-        <option>Engine Repair</option>
-        <option>Oil Change</option>
-      </select>
-      <label>Appointment Date</label>
-      <input type="date" name="date" min="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d', strtotime('+7 days')); ?>" required>
-      <label>Description</label>
-      <textarea name="message" placeholder="Describe the issue..."></textarea>
-      <button type="submit">Book Now</button>
-    </form>
-  </div>
+    <!-- Services -->
+    <section id="services">
+      <h2>Our Services</h2>
+      <ul>
+        <li>General Service</li>
+        <li>Engine Repair</li>
+        <li>Oil Change (Castrol, Motul, Shell)</li>
+        <li>Brake Repair</li>
+        <li>Battery Replacement</li>
+        <li>Custom Modifications</li>
+      </ul>
+    </section>
 
-  <div class="section" id="purchase">
-    <h2>Buy Spare Parts</h2>
-    <input type="text" placeholder="Search for parts (e.g., Castrol Engine Oil, Brake Pad)" list="parts">
-    <datalist id="parts">
-      <option>Castrol Engine Oil</option>
-      <option>Mobil 1 Synthetic</option>
-      <option>Shell Advance Oil</option>
-      <option>Brake Pad</option>
-      <option>Spark Plug</option>
-      <option>Chain Sprocket</option>
-      <option>Air Filter</option>
-      <option>Clutch Plate</option>
-      <option>Yamaha Engine Oil</option>
-      <option>Handle Grip</option>
-    </datalist>
-  </div>
+    <!-- Search Parts -->
+    <section class="search-part">
+      <h2>Search Spare Parts</h2>
+      <input list="parts" placeholder="Search for parts...">
+      <datalist id="parts">
+        <option>Engine Oil - Castrol</option>
+        <option>Engine Oil - Motul</option>
+        <option>Engine Oil - Shell</option>
+        <option>Brake Pad - TVS</option>
+        <option>Battery - Exide</option>
+        <option>Clutch Wire</option>
+        <option>Chain Sprocket</option>
+        <option>Air Filter</option>
+        <option>Indicator</option>
+        <option>Silencer</option>
+      </datalist>
+    </section>
 
-  <div class="section" id="gallery">
-    <h2>Shop Gallery</h2>
-    <img src="image1.jpg" alt="Shop image 1" style="width:100px;">
-    <img src="image2.jpg" alt="Shop image 2" style="width:100px;">
-  </div>
+    <!-- Booking -->
+    <section id="booking">
+      <h2>Book a Service</h2>
+      <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm()">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
+        <label>Select Service Type:</label>
+        <select name="service">
+          <option>General Service</option>
+          <option>Engine Repair</option>
+          <option>Oil Change</option>
+          <option>Brake Repair</option>
+          <option>Battery Replacement</option>
+        </select>
+        <label>Appointment Date:</label>
+        <input type="date" name="date" id="date" required>
+        <textarea name="description" placeholder="Describe your issue (optional)"></textarea>
+        <button type="submit">Book Now</button>
+      </form>
+    </section>
 
-  <div class="section" id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: Mumtaz007alam@gmail.com</p>
-    <p>Phone: 7762934833</p>
-    <p>Location: Bettiah, Bihar</p>
-    <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate on Map</a></p>
-  </div>
+    <!-- Gallery -->
+    <section id="gallery">
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <img src="image1.jpg">
+        <img src="image2.jpg">
+        <img src="image3.jpg">
+      </div>
+    </section>
 
-  <div class="section" id="customer">
-    <h2>Customer Area</h2>
+    <!-- Testimonials -->
+    <section id="testimonials">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonial">“Great and quick service! Highly recommended.”</div>
+      <div class="testimonial">“Affordable and trusted bike shop in Bettiah.”</div>
+    </section>
 
-    <!-- Registration -->
-    <form id="registerForm">
-      <h3>Register</h3>
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email" required>
-      <input type="tel" placeholder="Phone Number" required>
-      <input type="password" placeholder="Password" required>
-      <button type="submit">Register</button>
-    </form>
-
-    <!-- Login -->
-    <form id="loginForm" style="margin-top:30px;">
-      <h3>Login</h3>
-      <input type="text" placeholder="Full Name" required>
-      <input type="password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Phone: 7762934833</p>
+      <p>Email: Mumtaz007alam@gmail.com</p>
+      <p>Address: Near Bandhan Bank, Bettiah, Bihar 845438</p>
+      <a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839" target="_blank">Locate on Map</a>
+      <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" height="300" loading="lazy"></iframe>
+    </section>
 
     <!-- Dashboard -->
-    <div id="dashboard" style="display:none;" class="dashboard">
-      <h3>Welcome, <span id="userName">User</span>!</h3>
-      <p>Your Recent Service History:</p>
-      <table border="1" width="100%" style="text-align:left; border-collapse:collapse;">
-        <tr><th>Date</th><th>Service</th><th>Status</th></tr>
-        <tr><td>2025-04-01</td><td>Oil Change</td><td>Completed</td></tr>
-        <tr><td>2025-03-20</td><td>Engine Repair</td><td>In Progress</td></tr>
-      </table>
-      <br>
-      <button onclick="logout()">Logout</button>
-    </div>
+    <section id="dashboard">
+      <h2>Customer Dashboard</h2>
+      <div id="user-info"></div>
+      <div id="service-history"></div>
+    </section>
+
   </div>
-</div>
 
-<footer>
-  &copy; 2025 Nation Bike Spare Part & Workshop
-</footer>
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Nation Bike Spare Part & Workshop | All rights reserved
+  </footer>
 
-<script>
-  // Registration simulation
-  document.getElementById("registerForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    alert("Registered successfully! (Simulated)");
-  });
+  <!-- WhatsApp -->
+  <a href="https://wa.me/917762934833" style="position:fixed;bottom:20px;right:20px;" target="_blank">
+    <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"/>
+  </a>
 
-  // Login + Dashboard logic
-  document.getElementById("loginForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    const user = document.querySelector("#loginForm input[type='text']").value;
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("registerForm").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
-    document.getElementById("userName").innerText = user;
-  });
+  <script>
+    // Limit appointment date to one week ahead
+    const today = new Date().toISOString().split('T')[0];
+    const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const dateInput = document.getElementById('date');
+    dateInput.min = today;
+    dateInput.max = nextWeek;
 
-  function logout() {
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("loginForm").style.display = "block";
-    document.getElementById("registerForm").style.display = "block";
-  }
-</script>
+    function validateForm() {
+      const phone = document.querySelector('input[name="phone"]').value;
+      if (!/^\d{10}$/.test(phone)) {
+        alert("Enter a valid 10-digit phone number.");
+        return false;
+      }
+      return true;
+    }
 
+    // Firebase Config (Fill with your own)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_DOMAIN.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_BUCKET",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Show user profile (example)
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById("user-info").innerHTML = `<p>Welcome, ${user.email}</p>`;
+        // Fetch service history from Firestore
+        db.collection("services").where("uid", "==", user.uid)
+          .get().then(query => {
+            let html = "<h3>Service History:</h3><ul>";
+            query.forEach(doc => {
+              html += `<li>${doc.data().service} - ${doc.data().date}</li>`;
+            });
+            html += "</ul>";
+            document.getElementById("service-history").innerHTML = html;
+          });
+      } else {
+        document.getElementById("user-info").innerHTML = "<p>Please log in to view your dashboard.</p>";
+      }
+    });
+  </script>
 </body>
 </html>
