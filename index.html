@@ -81,23 +81,6 @@
     .search-button:hover {
       background-color: #005f99;
     }
-    #suggestionBox {
-      position: absolute;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      width: 100%;
-      max-height: 150px;
-      overflow-y: auto;
-      z-index: 1000;
-    }
-    .suggestion-item {
-      padding: 10px;
-      cursor: pointer;
-    }
-    .suggestion-item:hover {
-      background: #f0f0f0;
-    }
   </style>
 </head>
 <body>
@@ -124,31 +107,47 @@
 <section id="search" class="section">
   <h2>Search Spare Parts</h2>
   <div class="search-container">
-    <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, etc...">
+    <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, Castrol 10W40, etc...">
     <button class="search-button"><i class="fas fa-search"></i></button>
-    <div id="suggestionBox"></div>
   </div>
 </section>
+
 <!-- Booking Section -->
 <section id="book" class="section">
   <h2>Book a Service</h2>
-  <form action="https://formspree.io/f/xqapgvol" method="POST">
+  <form id="bookingForm" action="https://formspree.io/f/xqapgvol" method="POST">
     <input type="text" name="name" placeholder="Full Name" required>
-    <input type="email" name="email" placeholder="Email Address" required>
     <input type="tel" name="phone" placeholder="Phone Number" required>
-    <input type="date" name="booking-date" required>
-    <textarea name="service-details" placeholder="Describe your issue or service request..." rows="4"></textarea>
-    <button type="submit" class="button-primary">Book Now</button>
+    <select name="service" required>
+      <option value="">Select Service</option>
+      <option>General Service</option>
+      <option>Engine Repair</option>
+      <option>Oil Change</option>
+      <option>Chain Adjustment</option>
+      <option>Brake Check</option>
+      <option>Other</option>
+    </select>
+    <textarea name="description" placeholder="Describe your issue or request (optional)"></textarea>
+    <label>Choose Appointment Date</label>
+    <input type="date" name="date" min="" max="" required id="appointmentDate">
+    <button class="button-primary" type="submit">Submit Booking</button>
   </form>
 </section>
 
-<!-- Testimonials Section -->
+<script>
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 7);
+  const formatDate = d => d.toISOString().split("T")[0];
+  document.getElementById("appointmentDate").min = formatDate(today);
+  document.getElementById("appointmentDate").max = formatDate(maxDate);
+</script>
+
+<!-- Testimonials -->
 <section id="testimonials" class="section">
-  <h2>What Our Customers Say</h2>
-  <div>
-    <p><strong>Ravi Kumar:</strong> Excellent service! They fixed my bike quickly and professionally.</p>
-    <p><strong>Neha Sharma:</strong> Found all the spare parts I needed. Highly recommend!</p>
-  </div>
+  <h2>Customer Testimonials</h2>
+  <blockquote>"Nation Bike fixed my engine issue in a day! Super fast and reliable." – Rakesh Kumar</blockquote>
+  <blockquote>"Great service and genuine spare parts. I only trust them now." – Anjali Singh</blockquote>
 </section>
 
 <!-- Registration Section -->
@@ -172,46 +171,34 @@
     <button type="submit" class="button-primary">Login</button>
   </form>
 </section>
+
 <!-- Dashboard Section -->
 <section id="dashboard" class="section" style="display: none;">
   <h2>Welcome, <span id="userName"></span></h2>
   <p><strong>Email:</strong> <span id="userEmail"></span></p>
   <p><strong>Phone:</strong> <span id="userPhone"></span></p>
-  <h3>Service History</h3>
+  <p><strong>Service History:</strong></p>
   <ul id="serviceHistory"></ul>
-  <button onclick="logoutUser()" class="button-secondary">Logout</button>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="section">
-  <h2>Contact Us</h2>
-  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
-  <p>Phone: <a href="tel:+917762934833">7762934833</a></p>
-  <p>Location: Bettiah, Bihar</p>
-  <iframe
-    src="https://www.google.com/maps?q=26.8069560,84.5092640&z=15&output=embed"
-    width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
-  </iframe>
+  <button onclick="logout()" class="button-primary">Logout</button>
 </section>
 
 <!-- WhatsApp Chat -->
-<a href="https://wa.me/917762934833" target="_blank" class="whatsapp-float">
-  <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp Chat">
-</a>
+<script>
+  window.onload = function () {
+    const chatBtn = document.createElement("a");
+    chatBtn.href = "https://wa.me/917762934833";
+    chatBtn.target = "_blank";
+    chatBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Chat with Us';
+    chatBtn.style = "position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:10px 15px; border-radius:50px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #888;";
+    document.body.appendChild(chatBtn);
+  };
+</script>
 
-<!-- Chatbot (Floating Icon) -->
-<div id="chatbot" class="chatbot-float">
-  <button onclick="toggleChatbot()">Chat</button>
-  <div id="chatbox" class="chatbox" style="display: none;">
-    <p>Hello! How can I help you?</p>
-    <!-- Add simple interaction here -->
-  </div>
-</div>
-
-<!-- Firebase & Script -->
+<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyDGGuoM1RCdV-n9pkmw_c6wvGoejnu6rOE",
@@ -221,149 +208,116 @@
     messagingSenderId: "25249080743",
     appId: "1:25249080743:web:238adc1be73839fa740282"
   };
-
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-  // Your scripts for login, registration, dashboard updates, chatbot toggle, etc.
-</script>
-<!-- Styles -->
-<style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to top, #87ceeb, #ffffff);
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-  }
-
-  header {
-    background: #00aaff;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  nav a {
-    margin: 0 1rem;
-    color: white;
-    text-decoration: none;
-  }
-
-  section {
-    padding: 2rem;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .form-group {
-    margin-bottom: 1rem;
-  }
-
-  input, select, textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-  }
-
-  .button, .button-secondary {
-    padding: 0.5rem 1rem;
-    background: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .button-secondary {
-    background: #555;
-  }
-
-  .whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10;
-  }
-
-  .chatbot-float {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    z-index: 11;
-  }
-
-  .chatbox {
-    background: white;
-    border: 1px solid #00aaff;
-    border-radius: 10px;
-    padding: 1rem;
-    width: 250px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  }
-</style>
-
-<!-- Full JS Logic -->
-<script>
-  // Toggle Chatbot
-  function toggleChatbot() {
-    const box = document.getElementById("chatbox");
-    box.style.display = box.style.display === "none" ? "block" : "none";
-  }
-
-  // User Registration
-  document.getElementById("registerForm").addEventListener("submit", async (e) => {
+  document.getElementById("registerForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const name = document.getElementById("regName").value;
     const email = document.getElementById("regEmail").value;
     const phone = document.getElementById("regPhone").value;
     const password = document.getElementById("regPassword").value;
-    try {
-      const userCred = await auth.createUserWithEmailAndPassword(email, password);
-      await db.collection("users").doc(userCred.user.uid).set({ name, email, phone });
-      alert("Registered successfully!");
-      document.getElementById("registerForm").reset();
-    } catch (err) {
-      alert("Error: " + err.message);
-    }
+
+    auth.createUserWithEmailAndPassword(email, password).then(user => {
+      db.collection("users").doc(user.user.uid).set({
+        name: name,
+        email: email,
+        phone: phone,
+        history: []
+      });
+      alert("Registration successful!");
+    }).catch(error => alert(error.message));
   });
 
-  // User Login
-  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
-    try {
-      const userCred = await auth.signInWithEmailAndPassword(email, password);
-      loadDashboard(userCred.user.uid);
-    } catch (err) {
-      alert("Login failed: " + err.message);
+
+    auth.signInWithEmailAndPassword(email, password).then(user => {
+      showDashboard(user.user.uid);
+    }).catch(error => alert(error.message));
+  });
+
+  function logout() {
+    auth.signOut().then(() => {
+      document.getElementById("dashboard").style.display = "none";
+      alert("Logged out.");
+    });
+  }
+
+  function showDashboard(uid) {
+    db.collection("users").doc(uid).get().then(doc => {
+      const data = doc.data();
+      document.getElementById("userName").innerText = data.name;
+      document.getElementById("userEmail").innerText = data.email;
+      document.getElementById("userPhone").innerText = data.phone;
+      const history = data.history || [];
+      document.getElementById("serviceHistory").innerHTML = history.map(h => `<li>${h}</li>`).join('');
+      document.getElementById("dashboard").style.display = "block";
+    });
+  }
+</script>
+
+<!-- Search Functionality -->
+<script>
+  const spareParts = [
+    "Engine Oil", "Brake Pads", "Castrol 10W40", "Spark Plug", "Air Filter",
+    "Chain Sprocket", "Disc Brake", "Clutch Cable", "Headlight Bulb", "Indicator",
+    "Battery", "Tyre", "Fuel Pump", "Oil Filter", "Yamaha Lube", "Honda Genuine Oil"
+  ];
+
+  const input = document.getElementById("partSearch");
+  const searchBtn = document.querySelector(".search-button");
+
+  input.addEventListener("input", () => {
+    const value = input.value.toLowerCase();
+    const suggestions = spareParts.filter(part => part.toLowerCase().includes(value));
+    let suggestionHTML = "";
+    if (value && suggestions.length) {
+      suggestionHTML = suggestions.map(s => `<div class="suggestion-item">${s}</div>`).join("");
+    }
+    showSuggestions(suggestionHTML);
+  });
+
+  function showSuggestions(html) {
+    let box = document.getElementById("suggestionBox");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "suggestionBox";
+      box.style = "background: #fff; border: 1px solid #ccc; border-radius: 8px; position: absolute; width: calc(100% - 60px); max-height: 150px; overflow-y: auto; z-index: 1000;";
+      input.parentNode.appendChild(box);
+    }
+    box.innerHTML = html;
+    document.querySelectorAll(".suggestion-item").forEach(item => {
+      item.style.padding = "10px";
+      item.style.cursor = "pointer";
+      item.addEventListener("click", () => {
+        input.value = item.textContent;
+        box.innerHTML = "";
+      });
+    });
+  }
+
+  searchBtn.addEventListener("click", () => {
+    const query = input.value.trim().toLowerCase();
+    const found = spareParts.find(p => p.toLowerCase() === query);
+    if (found) {
+      alert(`"${found}" is available!`);
+    } else {
+      alert("Part not found. Please check spelling or try another keyword.");
     }
   });
-
-  // Load Dashboard
-  async function loadDashboard(uid) {
-    const userDoc = await db.collection("users").doc(uid).get();
-    const data = userDoc.data();
-    document.getElementById("userName").textContent = data.name;
-    document.getElementById("userEmail").textContent = data.email;
-    document.getElementById("userPhone").textContent = data.phone;
-
-    document.getElementById("dashboard").style.display = "block";
-    document.getElementById("login").style.display = "none";
-    document.getElementById("register").style.display = "none";
-  }
-
-  // Logout
-  function logoutUser() {
-    auth.signOut();
-    document.getElementById("dashboard").style.display = "none";
-    alert("Logged out.");
-  }
-
-  // Stay logged in
-  auth.onAuthStateChanged((user) => {
-    if (user) loadDashboard(user.uid);
-  });
 </script>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
+  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
+  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
+</section>
+
+</body>
+</html>
