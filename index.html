@@ -319,5 +319,73 @@
   <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
 </section>
 
+  <!-- Cart Sidebar -->
+<div id="cartSidebar" style="position:fixed; top:0; right:-100%; width:300px; height:100%; background:#f4f4f4; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition: right 0.3s ease; z-index:9999;">
+  <h3>Your Cart</h3>
+  <ul id="cartItems"></ul>
+  <p><strong>Total: ₹<span id="cartTotal">0</span></strong></p>
+  <button onclick="checkout()" class="button-primary">Checkout</button>
+  <button onclick="toggleCart()" class="button-primary" style="background:#ccc;">Close</button>
+</div>
+
+<!-- Floating Cart Icon -->
+<button onclick="toggleCart()" style="position:fixed; bottom:90px; right:20px; background:#007acc; color:white; border:none; padding:12px 18px; border-radius:50%; box-shadow:0 0 8px rgba(0,0,0,0.2); font-size:20px; z-index:9999;">
+  <i class="fas fa-shopping-cart"></i>
+</button>
+
+<!-- Product Showcase Section -->
+<section class="section" id="products">
+  <h2>Shop Spare Parts</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:20px;">
+    <div style="border:1px solid #ccc; padding:15px; border-radius:10px;">
+      <h4>Engine Oil</h4>
+      <p>Price: ₹400</p>
+      <button onclick="addToCart('Engine Oil', 400)" class="button-primary">Add to Cart</button>
+    </div>
+    <div style="border:1px solid #ccc; padding:15px; border-radius:10px;">
+      <h4>Brake Pads</h4>
+      <p>Price: ₹250</p>
+      <button onclick="addToCart('Brake Pads', 250)" class="button-primary">Add to Cart</button>
+    </div>
+    <!-- Add more products as needed -->
+  </div>
+</section>
+<script>
+  let cart = [];
+
+  function addToCart(name, price) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ name, price, qty: 1 });
+    }
+    updateCartDisplay();
+    alert(`${name} added to cart`);
+  }
+
+  function updateCartDisplay() {
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    cartItems.innerHTML = "";
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      cartItems.innerHTML += `<li>${item.name} x ${item.qty} = ₹${item.price * item.qty}</li>`;
+    });
+    cartTotal.innerText = total;
+  }
+
+  function toggleCart() {
+    const sidebar = document.getElementById("cartSidebar");
+    sidebar.style.right = sidebar.style.right === "0px" ? "-100%" : "0px";
+  }
+
+  function checkout() {
+    alert("Checkout coming soon with online payment integration!");
+    // Future: Add Razorpay or Stripe integration here
+  }
+</script>
+  
 </body>
 </html>
