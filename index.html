@@ -4,109 +4,96 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nation Bike Spare Part & Workshop</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      color: #333;
       background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
       background-size: cover;
+      color: #333;
     }
     header {
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.8);
       color: #fff;
       text-align: center;
-      padding: 20px 10px;
+      padding: 20px 0;
+      position: relative;
     }
     header img {
       max-height: 80px;
     }
+    .lang-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .lang-toggle button {
+      margin-left: 5px;
+      padding: 5px 10px;
+    }
     nav {
-      background-color: #333;
+      background: #222;
       text-align: center;
-      padding: 10px;
+      padding: 10px 0;
     }
     nav a {
-      color: white;
+      color: #fff;
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
     }
     .container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
       max-width: 1000px;
       margin: auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
       border-radius: 10px;
+    }
+    h2 {
+      color: #c0392b;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
     }
     .section {
       margin-bottom: 40px;
     }
-    h2 {
-      color: #2c3e50;
-    }
-    .card {
-      background-color: #f4f4f4;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 10px;
-      box-shadow: 2px 2px 6px #ccc;
-    }
     .gallery img {
       width: 100px;
       height: 100px;
-      object-fit: cover;
       margin: 5px;
       border-radius: 8px;
+      object-fit: cover;
     }
-    iframe {
+    .card {
+      background: #f4f4f4;
+      padding: 15px;
       border-radius: 10px;
-      width: 100%;
+      margin-bottom: 20px;
     }
     footer {
-      background: #222;
+      background: rgba(0, 0, 0, 0.8);
       color: #fff;
       text-align: center;
-      padding: 15px 10px;
-    }
-    .lang-toggle {
-      float: right;
-      margin-top: -40px;
-      margin-right: 10px;
-    }
-    .lang-toggle button {
-      margin-left: 5px;
-    }
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-    .whatsapp-float img {
-      width: 50px;
-      height: 50px;
+      padding: 15px 0;
     }
     input, select, textarea {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button[type="submit"] {
-      background-color: #28a745;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    #search-input {
       padding: 10px;
-      width: 100%;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .whatsapp-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+    .whatsapp-chat img {
+      width: 50px;
+    }
+    .search-bar {
       margin-bottom: 20px;
     }
   </style>
@@ -130,21 +117,17 @@
   </nav>
 
   <div class="container">
-
-    <div class="section" id="search">
-      <h2>Search Spare Parts / स्पेयर पार्ट खोजें</h2>
-      <input type="text" id="search-input" placeholder="Search for parts like Brake Pad, Castrol Oil...">
+    <div class="section search-bar">
+      <input type="text" id="partSearch" onkeyup="suggestParts()" placeholder="Search Spare Parts...">
+      <div id="suggestions"></div>
     </div>
 
     <div class="section" id="services">
       <h2 class="en">Our Services</h2>
       <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
-      <div class="card">General Servicing</div>
-      <div class="card">Engine Repair</div>
-      <div class="card">Oil Change</div>
-      <div class="card">Tyre Replacement</div>
-      <div class="card">Battery Check & Replace</div>
-      <div class="card">Modification & Upgrades</div>
+      <div class="card">Bike Repair & Maintenance</div>
+      <div class="card">Spare Part Sales</div>
+      <div class="card">Custom Modification</div>
     </div>
 
     <div class="section" id="gallery">
@@ -160,28 +143,26 @@
       <h2 class="en">Book a Service</h2>
       <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
       <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm()">
-        <label>Your Name / नाम:</label>
+        <label for="name">Name / नाम:</label>
         <input type="text" name="name" required>
-        
-        <label>Phone Number / फ़ोन नंबर:</label>
-        <input type="tel" name="phone" pattern="[0-9]{10}" required>
 
-        <label>Service Type / सेवा प्रकार:</label>
+        <label for="phone">Phone Number / फ़ोन नंबर:</label>
+        <input type="tel" name="phone" required pattern="[0-9]{10}" title="10-digit mobile number only">
+
+        <label for="service">Service Type:</label>
         <select name="service" required>
-          <option value="">Select</option>
+          <option value="">--Select Service--</option>
           <option>General Service</option>
           <option>Engine Repair</option>
           <option>Oil Change</option>
-          <option>Tyre Replacement</option>
-          <option>Battery Service</option>
-          <option>Other</option>
+          <option>Wheel Alignment</option>
         </select>
 
-        <label>Appointment Date / अपॉइंटमेंट तिथि:</label>
-        <input type="date" name="date" id="dateField" required>
+        <label for="date">Appointment Date:</label>
+        <input type="date" name="date" required id="datePicker">
 
-        <label>Description / विवरण:</label>
-        <textarea name="description" rows="3" placeholder="Optional"></textarea>
+        <label for="desc">Description:</label>
+        <textarea name="desc" rows="3" placeholder="Any specific issue or note..."></textarea>
 
         <button type="submit">Book Now</button>
       </form>
@@ -190,7 +171,7 @@
     <div class="section" id="purchase">
       <h2 class="en">Buy Spare Parts</h2>
       <h2 class="hi" style="display:none;">स्पेयर पार्ट्स खरीदें</h2>
-      <p><a href="#">Shop online for genuine parts & accessories</a></p>
+      <p><a href="#">Shop online for parts</a></p>
     </div>
 
     <div class="section" id="contact">
@@ -198,18 +179,17 @@
       <h2 class="hi" style="display:none;">संपर्क करें</h2>
       <p>Email: Mumtaz007alam@gmail.com</p>
       <p>Phone: 7762934833</p>
-      <p>Address: Near Bandhan Bank, Bettiah, Bihar 845438</p>
+      <p>Near Bandhan Bank, Bettiah, Bihar 845438</p>
       <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">View on Google Map / गूगल मैप पर देखें</a></p>
       <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" height="300" loading="lazy"></iframe>
     </div>
-
   </div>
 
   <footer>
     <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
   </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/917762934833" target="_blank">
+  <a href="https://wa.me/917762934833" class="whatsapp-chat" target="_blank" title="Chat on WhatsApp">
     <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp Chat" />
   </a>
 
@@ -221,39 +201,31 @@
 
     function validateForm() {
       const phone = document.querySelector('input[name="phone"]').value;
-      if (!/^\d{10}$/.test(phone)) {
+      if (!/^[0-9]{10}$/.test(phone)) {
         alert("Please enter a valid 10-digit phone number.");
         return false;
       }
       return true;
     }
 
-    const dateField = document.getElementById("dateField");
+    // Set date min/max for date picker
+    const dateInput = document.getElementById("datePicker");
     const today = new Date();
     const maxDate = new Date();
     maxDate.setDate(today.getDate() + 7);
-    dateField.min = today.toISOString().split("T")[0];
-    dateField.max = maxDate.toISOString().split("T")[0];
+    dateInput.min = today.toISOString().split("T")[0];
+    dateInput.max = maxDate.toISOString().split("T")[0];
 
-    const suggestions = [
-      "Engine Oil - Castrol", "Engine Oil - Motul", "Brake Pad", "Air Filter", "Oil Filter", 
-      "Spark Plug", "Battery", "Chain Sprocket", "Indicator Light", "Clutch Plate", 
-      "Tyre - MRF", "Tyre - Ceat", "Side Mirror", "Horn", "Headlight Bulb"
-    ];
-    const searchInput = document.getElementById("search-input");
-    searchInput.addEventListener("input", function () {
-      const value = this.value.toLowerCase();
-      this.setAttribute("list", "suggestions");
-      const datalist = document.createElement("datalist");
-      datalist.id = "suggestions";
-      datalist.innerHTML = "";
-      suggestions.forEach(s => {
-        if (s.toLowerCase().includes(value)) {
-          datalist.innerHTML += `<option value="${s}">`;
-        }
-      });
-      document.body.appendChild(datalist);
-    });
+    function suggestParts() {
+      const parts = [
+        "Engine Oil - Castrol", "Engine Oil - Motul", "Clutch Plate", "Brake Shoe", "Air Filter",
+        "Oil Filter", "Spark Plug", "Chain Sprocket Kit", "Front Fork Oil", "Headlight Bulb",
+        "Disc Pad", "Battery - Exide", "Battery - Amaron", "Tyre - MRF", "Tyre - CEAT"
+      ];
+      const query = document.getElementById("partSearch").value.toLowerCase();
+      const suggestions = parts.filter(p => p.toLowerCase().includes(query));
+      document.getElementById("suggestions").innerHTML = suggestions.map(s => `<div>${s}</div>`).join("");
+    }
   </script>
 </body>
 </html>
