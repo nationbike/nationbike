@@ -4,168 +4,198 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nation Bike Spare Part & Workshop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 0;
-      background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(to bottom, #ccefff, #e6f7ff);
       color: #333;
     }
     header {
-      background: #6ec6ff;
-      padding: 20px;
+      background: #007acc;
+      color: #fff;
       text-align: center;
-      color: white;
-    }
-    header img {
-      max-height: 80px;
+      padding: 20px;
     }
     nav {
-      background: #0288d1;
-      text-align: center;
+      background: #005f99;
+      display: flex;
+      justify-content: center;
       padding: 10px;
+      flex-wrap: wrap;
     }
     nav a {
       color: white;
-      margin: 0 15px;
+      margin: 10px;
       text-decoration: none;
       font-weight: bold;
     }
     .container {
       max-width: 1000px;
-      margin: 20px auto;
-      background: rgba(255, 255, 255, 0.95);
+      margin: auto;
       padding: 20px;
-      border-radius: 10px;
-    }
-    h2 {
-      color: #0277bd;
     }
     .section {
       margin-bottom: 40px;
+      background: #ffffffd9;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #005f99;
     }
     .gallery img {
       width: 100px;
       height: 100px;
-      object-fit: cover;
       margin: 5px;
+      object-fit: cover;
       border-radius: 8px;
     }
-    .lang-toggle {
-      float: right;
+    .service-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .card {
+      background: #e6f5ff;
+      border-left: 5px solid #007acc;
+      padding: 15px;
+      flex: 1;
+      min-width: 200px;
+      border-radius: 8px;
     }
     footer {
-      background: #0288d1;
-      color: white;
       text-align: center;
-      padding: 10px;
+      background: #007acc;
+      color: white;
+      padding: 10px 0;
     }
     input, select, textarea {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-    .service-card {
-      background: #e1f5fe;
-      border-left: 6px solid #0288d1;
-      padding: 10px;
-      margin: 10px 0;
+      margin-top: 5px;
+      margin-bottom: 15px;
       border-radius: 6px;
-    }
-    .search-box {
-      margin-bottom: 20px;
-    }
-    #suggestions {
-      background: white;
       border: 1px solid #ccc;
-      border-radius: 5px;
-      position: relative;
-      z-index: 10;
     }
-    #suggestions div {
-      padding: 8px;
+    button {
+      background: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
       cursor: pointer;
     }
-    #suggestions div:hover {
-      background-color: #f0f0f0;
+    .testimonial {
+      border-left: 4px solid #007acc;
+      margin-bottom: 20px;
+      padding-left: 15px;
     }
-    .whatsapp {
+    #whatsapp {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      z-index: 1000;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      padding: 12px 16px;
+      font-size: 24px;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="logo.png" alt="Nation Bike Logo" />
+    <img src="logo.png" alt="Nation Bike Logo" style="max-height: 80px;"><br>
     <h1>Nation Bike Spare Part & Workshop</h1>
-    <div class="lang-toggle">
-      <button onclick="toggleLang('en')">English</button>
-      <button onclick="toggleLang('hi')">हिंदी</button>
-    </div>
   </header>
 
   <nav>
     <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#booking">Booking</a>
+    <a href="#booking">Book Service</a>
     <a href="#purchase">Purchase</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </nav>
 
   <div class="container">
-    <div class="section" id="search">
-      <h2>Search Spare Parts</h2>
-      <div class="search-box">
-        <input type="text" id="partSearch" placeholder="Search for spare parts..." oninput="showSuggestions()"/>
-        <div id="suggestions"></div>
-      </div>
-    </div>
 
     <div class="section" id="services">
-      <h2 class="en">Our Services</h2>
-      <div class="service-card">Bike Repair & Maintenance</div>
-      <div class="service-card">Spare Part Sales</div>
-      <div class="service-card">Custom Modification</div>
-    </div>
-
-    <div class="section" id="gallery">
-      <h2>Shop Gallery</h2>
-      <div class="gallery">
-        <img src="image1.jpg" alt="Image 1">
-        <img src="image2.jpg" alt="Image 2">
+      <h2>Our Services</h2>
+      <div class="service-card">
+        <div class="card">General Service</div>
+        <div class="card">Engine Repair</div>
+        <div class="card">Oil Change</div>
+        <div class="card">Brake Check</div>
+        <div class="card">Bike Modification</div>
       </div>
     </div>
 
     <div class="section" id="booking">
       <h2>Book a Service</h2>
       <form action="https://formspree.io/f/xqapgvol" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="tel" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}" />
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone" pattern="[0-9]{10}" required>
+
+        <label>Service Type</label>
         <select name="service">
-          <option value="">Select Service</option>
           <option>General Service</option>
           <option>Engine Repair</option>
           <option>Oil Change</option>
-          <option>Brake Service</option>
-          <option>Chain Adjustment</option>
+          <option>Brake Check</option>
         </select>
-        <textarea name="message" placeholder="Additional Details..."></textarea>
-        <label>Select Appointment Date:</label>
-        <input type="date" name="appointment" min="" max="" required id="apptDate"/>
+
+        <label>Appointment Date</label>
+        <input type="date" name="date" min="<?= date('Y-m-d') ?>" max="<?= date('Y-m-d', strtotime('+7 days')) ?>" required>
+
+        <label>Additional Details</label>
+        <textarea name="message" placeholder="Tell us more..."></textarea>
+
         <button type="submit">Book Now</button>
       </form>
     </div>
 
     <div class="section" id="purchase">
-      <h2>Buy Spare Parts</h2>
-      <p><a href="#">Shop online for parts</a></p>
+      <h2>Search Spare Parts</h2>
+      <input type="text" list="parts" placeholder="Search for parts..." />
+      <datalist id="parts">
+        <option value="Engine Oil - Castrol">
+        <option value="Engine Oil - Motul">
+        <option value="Brake Pads">
+        <option value="Clutch Plate">
+        <option value="Spark Plug">
+        <option value="Headlight Bulb">
+        <option value="Chain Set">
+        <option value="Air Filter">
+      </datalist>
+    </div>
+
+    <div class="section" id="gallery">
+      <h2>Shop Gallery</h2>
+      <div class="gallery">
+        <img src="image1.jpg" alt="Shop Image 1">
+        <img src="image2.jpg" alt="Shop Image 2">
+        <!-- Add more as needed -->
+      </div>
+    </div>
+
+    <div class="section" id="testimonials">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonial">
+        <p>"Great service and very affordable rates. Highly recommended!"</p>
+        <strong>- Ramesh Kumar</strong>
+      </div>
+      <div class="testimonial">
+        <p>"I got my bike fixed in no time. Friendly staff and neat work."</p>
+        <strong>- Priya Verma</strong>
+      </div>
     </div>
 
     <div class="section" id="contact">
@@ -173,55 +203,25 @@
       <p>Email: Mumtaz007alam@gmail.com</p>
       <p>Phone: 7762934833</p>
       <p>Address: Near Bandhan Bank, Bettiah, Bihar 845438</p>
-      <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">View on Google Map</a></p>
-      <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=es;z=14&output=embed" height="300" allowfullscreen="" loading="lazy"></iframe>
+      <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">
+        View on Google Map
+      </a></p>
+      <iframe 
+        src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" 
+        height="300" 
+        style="border:0;" 
+        allowfullscreen 
+        loading="lazy">
+      </iframe>
     </div>
+
   </div>
+
+  <a id="whatsapp" href="https://wa.me/917762934833" target="_blank" title="Chat with us on WhatsApp">✉</a>
 
   <footer>
     <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
   </footer>
 
-  <a class="whatsapp" href="https://wa.me/917762934833" target="_blank">
-    <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="Chat on WhatsApp">
-  </a>
-
-  <script>
-    function toggleLang(lang) {
-      document.querySelectorAll('.en, .hi').forEach(el => {
-        el.style.display = el.classList.contains(lang) ? 'block' : 'none';
-      });
-    }
-
-    const suggestions = [
-      "Engine Oil - Castrol", "Engine Oil - Mobil", "Brake Pads", "Clutch Wire", "Spark Plug",
-      "Chain Sprocket", "Bike Battery", "Indicators", "Headlight", "Tail Light", "Air Filter"
-    ];
-
-    function showSuggestions() {
-      const input = document.getElementById("partSearch").value.toLowerCase();
-      const container = document.getElementById("suggestions");
-      container.innerHTML = "";
-      if (input) {
-        suggestions.filter(s => s.toLowerCase().includes(input)).forEach(s => {
-          const div = document.createElement("div");
-          div.textContent = s;
-          div.onclick = () => {
-            document.getElementById("partSearch").value = s;
-            container.innerHTML = "";
-          };
-          container.appendChild(div);
-        });
-      }
-    }
-
-    // Set calendar date range
-    const today = new Date();
-    const maxDate = new Date();
-    maxDate.setDate(today.getDate() + 7);
-    const formatDate = d => d.toISOString().split("T")[0];
-    document.getElementById("apptDate").min = formatDate(today);
-    document.getElementById("apptDate").max = formatDate(maxDate);
-  </script>
 </body>
-</html>
+  </html>
