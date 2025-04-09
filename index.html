@@ -1,42 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nation Bike Spare Part & Workshop</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
       margin: 0;
       padding: 0;
+      color: #333;
       background: url('https://media.giphy.com/media/JtBZmzjyFfZskFqM8R/giphy.gif') no-repeat center center fixed;
       background-size: cover;
-      color: #333;
     }
     header {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(30, 30, 30, 0.9);
       color: #fff;
-      text-align: center;
       padding: 20px 0;
-      position: relative;
-    }
-    header img {
-      max-height: 80px;
-    }
-    .lang-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-    .lang-toggle button {
-      margin-left: 5px;
-      padding: 5px 10px;
+      text-align: center;
     }
     nav {
-      background: #222;
+      background: rgba(51, 51, 51, 0.9);
+      padding: 10px;
       text-align: center;
-      padding: 10px 0;
     }
     nav a {
       color: #fff;
@@ -45,187 +31,220 @@
       font-weight: bold;
     }
     .container {
+      padding: 20px;
       max-width: 1000px;
       margin: auto;
       background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
       border-radius: 10px;
-    }
-    h2 {
-      color: #c0392b;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 5px;
     }
     .section {
       margin-bottom: 40px;
     }
-    .gallery img {
-      width: 100px;
-      height: 100px;
-      margin: 5px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-    .card {
-      background: #f4f4f4;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
     footer {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(30, 30, 30, 0.9);
       color: #fff;
       text-align: center;
       padding: 15px 0;
     }
-    input, select, textarea {
+    iframe {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .gallery img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin: 5px;
+      border-radius: 8px;
+    }
+    .lang-toggle {
+      float: right;
+      margin-right: 20px;
+      color: white;
+    }
+    .search-container {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    #searchInput {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      font-size: 16px;
     }
-    .whatsapp-chat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+    #suggestionsList {
+      list-style: none;
+      padding: 0;
+      margin: 5px 0 0;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      position: absolute;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 99;
     }
-    .whatsapp-chat img {
-      width: 50px;
+    #suggestionsList li {
+      padding: 8px 10px;
+      cursor: pointer;
     }
-    .search-bar {
-      margin-bottom: 20px;
+    #suggestionsList li:hover {
+      background: #f0f0f0;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Nation Bike Logo" />
+    <img src="logo.png" alt="Nation Bike Logo" style="max-height: 80px; margin-bottom: 10px;">
     <h1>Nation Bike Spare Part & Workshop</h1>
     <div class="lang-toggle">
       <button onclick="toggleLang('en')">English</button>
       <button onclick="toggleLang('hi')">हिंदी</button>
     </div>
   </header>
-
   <nav>
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
     <a href="#booking">Booking</a>
     <a href="#purchase">Purchase</a>
+    <a href="#search">Search</a>
     <a href="#contact">Contact</a>
   </nav>
+  <div class="container"><div class="section" id="services">
+  <h2 class="en">Our Services</h2>
+  <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
+  <ul>
+    <li>Bike Repair & Maintenance</li>
+    <li>Spare Part Sales</li>
+    <li>Custom Modification</li>
+  </ul>
+</div>
 
-  <div class="container">
-    <div class="section search-bar">
-      <input type="text" id="partSearch" onkeyup="suggestParts()" placeholder="Search Spare Parts...">
-      <div id="suggestions"></div>
-    </div>
-
-    <div class="section" id="services">
-      <h2 class="en">Our Services</h2>
-      <h2 class="hi" style="display:none;">हमारी सेवाएं</h2>
-      <div class="card">Bike Repair & Maintenance</div>
-      <div class="card">Spare Part Sales</div>
-      <div class="card">Custom Modification</div>
-    </div>
-
-    <div class="section" id="gallery">
-      <h2 class="en">Shop Gallery</h2>
-      <h2 class="hi" style="display:none;">दुकान की गैलरी</h2>
-      <div class="gallery">
-        <img src="image1.jpg" alt="Shop Image 1">
-        <img src="image2.jpg" alt="Shop Image 2">
-      </div>
-    </div>
-
-    <div class="section" id="booking">
-      <h2 class="en">Book a Service</h2>
-      <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
-      <form action="https://formspree.io/f/xqapgvol" method="POST" onsubmit="return validateForm()">
-        <label for="name">Name / नाम:</label>
-        <input type="text" name="name" required>
-
-        <label for="phone">Phone Number / फ़ोन नंबर:</label>
-        <input type="tel" name="phone" required pattern="[0-9]{10}" title="10-digit mobile number only">
-
-        <label for="service">Service Type:</label>
-        <select name="service" required>
-          <option value="">--Select Service--</option>
-          <option>General Service</option>
-          <option>Engine Repair</option>
-          <option>Oil Change</option>
-          <option>Wheel Alignment</option>
-        </select>
-
-        <label for="date">Appointment Date:</label>
-        <input type="date" name="date" required id="datePicker">
-
-        <label for="desc">Description:</label>
-        <textarea name="desc" rows="3" placeholder="Any specific issue or note..."></textarea>
-
-        <button type="submit">Book Now</button>
-      </form>
-    </div>
-
-    <div class="section" id="purchase">
-      <h2 class="en">Buy Spare Parts</h2>
-      <h2 class="hi" style="display:none;">स्पेयर पार्ट्स खरीदें</h2>
-      <p><a href="#">Shop online for parts</a></p>
-    </div>
-
-    <div class="section" id="contact">
-      <h2 class="en">Contact Us</h2>
-      <h2 class="hi" style="display:none;">संपर्क करें</h2>
-      <p>Email: Mumtaz007alam@gmail.com</p>
-      <p>Phone: 7762934833</p>
-      <p>Near Bandhan Bank, Bettiah, Bihar 845438</p>
-      <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">View on Google Map / गूगल मैप पर देखें</a></p>
-      <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=en&z=16&output=embed" height="300" loading="lazy"></iframe>
-    </div>
+<div class="section" id="gallery">
+  <h2 class="en">Shop Gallery</h2>
+  <h2 class="hi" style="display:none;">दुकान की गैलरी</h2>
+  <div class="gallery">
+    <img src="image1.jpg" alt="Shop Image 1">
+    <img src="image2.jpg" alt="Shop Image 2">
   </div>
+</div>
 
-  <footer>
+<div class="section" id="booking">
+  <h2 class="en">Book a Service</h2>
+  <h2 class="hi" style="display:none;">सेवा बुक करें</h2>
+  <form action="https://formspree.io/f/xqapgvol" method="POST">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="phone">Phone Number:</label><br>
+    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="10-digit number"><br><br>
+
+    <label for="service">Select Service:</label><br>
+    <select id="service" name="service">
+      <option>General Service</option>
+      <option>Engine Repair</option>
+      <option>Oil Change</option>
+      <option>Brake Service</option>
+      <option>Custom Modification</option>
+    </select><br><br>
+
+    <label for="date">Appointment Date:</label><br>
+    <input type="date" id="date" name="date" required><br><br>
+
+    <label for="desc">Additional Description:</label><br>
+    <textarea id="desc" name="description" rows="4"></textarea><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<div class="section" id="purchase">
+  <h2 class="en">Buy Spare Parts</h2>
+  <h2 class="hi" style="display:none;">स्पेयर पार्ट्स खरीदें</h2>
+  <p><a href="#">Shop online for parts</a></p>
+</div>
+
+<div class="section" id="search">
+  <h2 class="en">Search Spare Parts</h2>
+  <h2 class="hi" style="display:none;">स्पेयर पार्ट्स खोजें</h2>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search for parts..." onkeyup="filterSuggestions()" />
+    <ul id="suggestionsList"></ul>
+  </div>
+</div>
+
+<div class="section" id="contact">
+  <h2 class="en">Contact Us</h2>
+  <h2 class="hi" style="display:none;">संपर्क करें</h2>
+  <p>Email: Mumtaz007alam@gmail.com</p>
+  <p>Phone: 7762934833</p>
+  <p>Location: Near Bandhan Bank, Bettiah, Bihar 845438</p>
+  <p><a href="https://maps.app.goo.gl/CJUmn6rRqiy4WJ839?g_st=aw" target="_blank">View on Google Map / गूगल मैप पर देखें</a></p>
+</div>
+
+<div class="section">
+  <h2 class="en">Find Us on Map</h2>
+  <h2 class="hi" style="display:none;">हमें मानचित्र पर देखें</h2>
+  <iframe
+    src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=es;z=14&output=embed"
+    height="300"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+  </div>  <footer>
     <p>&copy; 2025 Nation Bike Spare Part & Workshop</p>
-  </footer>
-
-  <a href="https://wa.me/917762934833" class="whatsapp-chat" target="_blank" title="Chat on WhatsApp">
-    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp Chat" />
-  </a>
-
-  <script>
+  </footer>  <script>
     function toggleLang(lang) {
       document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
       document.querySelectorAll('.hi').forEach(el => el.style.display = lang === 'hi' ? 'block' : 'none');
     }
 
-    function validateForm() {
-      const phone = document.querySelector('input[name="phone"]').value;
-      if (!/^[0-9]{10}$/.test(phone)) {
-        alert("Please enter a valid 10-digit phone number.");
-        return false;
-      }
-      return true;
+    const suggestions = [
+      "Engine Oil - Castrol",
+      "Engine Oil - Motul",
+      "Brake Pads - Hero",
+      "Air Filter - Bajaj",
+      "Chain Lube",
+      "Spark Plug - NGK",
+      "Battery - Exide",
+      "Clutch Plate",
+      "Side Mirror",
+      "Handle Grip",
+      "Headlight Bulb",
+      "Mobile Holder",
+      "Helmet - Studds",
+      "Tyre - MRF"
+    ];
+
+    function filterSuggestions() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const list = document.getElementById('suggestionsList');
+      list.innerHTML = '';
+      if (!input) return;
+      const filtered = suggestions.filter(item => item.toLowerCase().includes(input));
+      filtered.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        li.onclick = () => {
+          document.getElementById('searchInput').value = item;
+          list.innerHTML = '';
+        };
+        list.appendChild(li);
+      });
     }
 
-    // Set date min/max for date picker
-    const dateInput = document.getElementById("datePicker");
+    // Limit appointment date to today + 7 days
+    const dateInput = document.getElementById('date');
     const today = new Date();
     const maxDate = new Date();
     maxDate.setDate(today.getDate() + 7);
-    dateInput.min = today.toISOString().split("T")[0];
-    dateInput.max = maxDate.toISOString().split("T")[0];
-
-    function suggestParts() {
-      const parts = [
-        "Engine Oil - Castrol", "Engine Oil - Motul", "Clutch Plate", "Brake Shoe", "Air Filter",
-        "Oil Filter", "Spark Plug", "Chain Sprocket Kit", "Front Fork Oil", "Headlight Bulb",
-        "Disc Pad", "Battery - Exide", "Battery - Amaron", "Tyre - MRF", "Tyre - CEAT"
-      ];
-      const query = document.getElementById("partSearch").value.toLowerCase();
-      const suggestions = parts.filter(p => p.toLowerCase().includes(query));
-      document.getElementById("suggestions").innerHTML = suggestions.map(s => `<div>${s}</div>`).join("");
-    }
-  </script>
-</body>
+    dateInput.min = today.toISOString().split('T')[0];
+    dateInput.max = maxDate.toISOString().split('T')[0];
+  </script></body>
 </html>
