@@ -61,6 +61,25 @@
     .button-primary:hover {
       background-color: #005f99;
     }
+    .search-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .search-container input {
+      flex-grow: 1;
+    }
+    .search-button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .search-button:hover {
+      background-color: #005f99;
+    }
   </style>
 </head>
 <body>
@@ -86,7 +105,10 @@
 <!-- Search Section -->
 <section id="search" class="section">
   <h2>Search Spare Parts</h2>
-  <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, Castrol 10W40, etc...">
+  <div class="search-container">
+    <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, Castrol 10W40, etc...">
+    <button class="search-button"><i class="fas fa-search"></i></button>
+  </div>
 </section>
 
 <!-- Booking Section -->
@@ -237,7 +259,7 @@
   }
 </script>
 
-<!-- Contact Section at bottom -->
+<!-- Contact Section (Bottom of page) -->
 <section id="contact" class="section">
   <h2>Contact Us</h2>
   <p>Phone: <a href="tel:7762934833">7762934833</a></p>
