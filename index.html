@@ -247,6 +247,7 @@
     });
   }
 
+    <script>
   function showDashboard(uid) {
     db.collection("users").doc(uid).get().then(doc => {
       const data = doc.data();
@@ -256,6 +257,14 @@
       const history = data.history || [];
       document.getElementById("serviceHistory").innerHTML = history.map(h => `<li>${h}</li>`).join('');
       document.getElementById("dashboard").style.display = "block";
+
+      // Hide other sections
+      document.getElementById("register").style.display = "none";
+      document.getElementById("login").style.display = "none";
+      document.getElementById("book").style.display = "none";
+      document.getElementById("search").style.display = "none";
+      document.getElementById("testimonials").style.display = "none";
+      document.getElementById("contact").style.display = "none";
     });
   }
 </script>
