@@ -1,256 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nation Bike Spare Part & Workshop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom, #cce7ff, #e6f7ff);
-      color: #333;
+      background: linear-gradient(to bottom, #e0f7ff, #ffffff);
     }
     header {
-      background-color: #0099ff;
+      background-color: #007acc;
       color: white;
       padding: 1rem;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: bold;
       letter-spacing: 1px;
     }
     nav {
-      background-color: #0066cc;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      padding: 0.5rem;
+      background-color: #005f99;
+      padding: 10px;
+      text-align: center;
     }
     nav a {
       color: white;
+      margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
     }
-    section {
-      padding: 2rem;
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #cceeff;
     }
     .section {
-      margin-bottom: 2rem;
-      background-color: #f5fbff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 30px 20px;
     }
-    input, select, textarea {
+    h2 {
+      color: #007acc;
+      border-bottom: 2px solid #007acc;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+    input, select, textarea, button {
+      padding: 10px;
       width: 100%;
-      padding: 0.7rem;
-      margin: 0.5rem 0;
+      margin-bottom: 10px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 8px;
     }
-    button {
-      padding: 0.8rem 1.5rem;
-      background-color: #0099ff;
+    .button-primary {
+      background-color: #007acc;
       color: white;
       border: none;
-      border-radius: 5px;
-      font-weight: bold;
       cursor: pointer;
     }
-    footer {
-      background-color: #004080;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-    .whatsapp-chat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
-    }
-    .dashboard, .login-form, .register-form {
-      display: none;
+    .button-primary:hover {
+      background-color: #005f99;
     }
   </style>
 </head>
 <body>
-  <header>
-    Nation Bike Spare Part & Workshop
-  </header>
 
-  <nav>
-    <a href="#services">Services</a>
-    <a href="#booking">Book Service</a>
-    <a href="#search">Search Parts</a>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<header>
+  Nation Bike Spare Part & Workshop
+</header>
+<nav>
+  <a href="#search">Search Parts</a>
+  <a href="#book">Book Service</a>
+  <a href="#contact">Contact</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#register">Register</a>
+  <a href="#dashboard">Dashboard</a>
+</nav>
 
-  <main>
-    <!-- Services Section -->
-    <section id="services" class="section">
-      <h2>Our Services</h2>
-      <ul>
-        <li>General Service</li>
-        <li>Engine Repair</li>
-        <li>Oil Change (Castrol, Motul, Shell)</li>
-        <li>Brake and Clutch Work</li>
-        <li>Chain & Sprocket Replacement</li>
-      </ul>
-    </section>
+<div class="hero">
+  <h1>Welcome to Nation Bike</h1>
+  <p>Your trusted partner for all bike repair & spare parts needs.</p>
+</div>
 
-    <!-- Booking Section -->
-    <section id="booking" class="section">
-      <h2>Book a Service</h2>
-      <form action="https://formspree.io/f/xqapgvol" method="POST">
-        <input type="text" name="name" placeholder="Full Name" required />
-        <input type="tel" name="phone" placeholder="Phone Number" required />
-        <select name="service" required>
-          <option value="">Select Service</option>
-          <option value="general">General Service</option>
-          <option value="engine">Engine Repair</option>
-          <option value="oil">Oil Change</option>
-          <option value="brake">Brake & Clutch Work</option>
-        </select>
-        <textarea name="description" placeholder="Describe the issue or request"></textarea>
-        <input type="date" name="date" required min="" id="appointment-date"/>
-        <button type="submit">Book Now</button>
-      </form>
-    </section>
+<!-- Search Section -->
+<section id="search" class="section">
+  <h2>Search Spare Parts</h2>
+  <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, Castrol 10W40, etc...">
+</section>
 
-    <!-- Search Spare Parts -->
-    <section id="search" class="section">
-      <h2>Search Spare Parts</h2>
-      <input type="text" id="spareSearch" placeholder="Search for spare parts or oil..." list="suggestions"/>
-      <datalist id="suggestions">
-        <option value="Engine Oil - Castrol">
-        <option value="Engine Oil - Motul">
-        <option value="Brake Pads">
-        <option value="Clutch Plates">
-        <option value="Air Filter">
-        <option value="Fuel Filter">
-        <option value="Chain & Sprocket">
-        <option value="Headlight Bulb">
-        <option value="Spark Plug">
-      </datalist>
-    </section>
+<!-- Booking Section -->
+<section id="book" class="section">
+  <h2>Book a Service</h2>
+  <form id="bookingForm" action="https://formspree.io/f/xqapgvol" method="POST">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <select name="service" required>
+      <option value="">Select Service</option>
+      <option>General Service</option>
+      <option>Engine Repair</option>
+      <option>Oil Change</option>
+      <option>Chain Adjustment</option>
+      <option>Brake Check</option>
+      <option>Other</option>
+    </select>
+    <textarea name="description" placeholder="Describe your issue or request (optional)"></textarea>
+    <label>Choose Appointment Date</label>
+    <input type="date" name="date" min="" max="" required id="appointmentDate">
+    <button class="button-primary" type="submit">Submit Booking</button>
+  </form>
+</section>
 
-    <!-- User Area -->
-    <section id="dashboard" class="section">
-      <h2>Customer Dashboard</h2>
-      <div id="loginArea">
-        <form id="loginForm" class="login-form">
-          <h3>Login</h3>
-          <input type="email" id="loginEmail" placeholder="Email" required />
-          <input type="password" id="loginPassword" placeholder="Password" required />
-          <button type="submit">Login</button>
-        </form>
-        <form id="registerForm" class="register-form">
-          <h3>Register</h3>
-          <input type="text" id="regName" placeholder="Full Name" required />
-          <input type="email" id="regEmail" placeholder="Email" required />
-          <input type="tel" id="regPhone" placeholder="Phone Number" required />
-          <input type="password" id="regPassword" placeholder="Password" required />
-          <button type="submit">Register</button>
-        </form>
-      </div>
+<script>
+  // Auto-fill date range for 7 days forward
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 7);
+  const formatDate = d => d.toISOString().split("T")[0];
+  document.getElementById("appointmentDate").min = formatDate(today);
+  document.getElementById("appointmentDate").max = formatDate(maxDate);
+</script>
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
+  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
+  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
+</section>
 
-      <div id="userDashboard" class="dashboard">
-        <h3>Welcome, <span id="userName">User</span></h3>
-        <p>Your Service History:</p>
-        <ul id="serviceHistory"></ul>
-        <button onclick="logout()">Logout</button>
-      </div>
-    </section>
-    <!-- Customer Testimonials -->
-    <section class="section" id="testimonials">
-      <h2>Customer Testimonials</h2>
-      <blockquote>"Great service, my bike feels brand new again!" - Rahul S.</blockquote>
-      <blockquote>"Fast and professional. Highly recommend Nation Bike!" - Priya K.</blockquote>
-      <blockquote>"Affordable and quality parts. Will come again!" - Aman T.</blockquote>
-    </section>
+<!-- WhatsApp Chat -->
+<script>
+  window.onload = function () {
+    const chatBtn = document.createElement("a");
+    chatBtn.href = "https://wa.me/917762934833";
+    chatBtn.target = "_blank";
+    chatBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Chat with Us';
+    chatBtn.style = "position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:10px 15px; border-radius:50px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #888;";
+    document.body.appendChild(chatBtn);
+  };
+</script>
 
-    <!-- Contact Us -->
-    <section id="contact" class="section">
-      <h2>Contact Us</h2>
-      <p><strong>Phone:</strong> <a href="tel:+917762934833">+91 7762934833</a></p>
-      <p><strong>Email:</strong> <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
-      <p><strong>Location:</strong> <a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate us on Map</a></p>
-    </section>
-  </main>
+<!-- Testimonials -->
+<section id="testimonials" class="section">
+  <h2>Customer Testimonials</h2>
+  <blockquote>"Nation Bike fixed my engine issue in a day! Super fast and reliable." – Rakesh Kumar</blockquote>
+  <blockquote>"Great service and genuine spare parts. I only trust them now." – Anjali Singh</blockquote>
+</section>
 
-  <!-- WhatsApp Chat -->
-  <a href="https://wa.me/917762934833" class="whatsapp-chat" target="_blank">
-    <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="Chat on WhatsApp"/>
-  </a>
+<!-- Registration Section -->
+<section id="register" class="section">
+  <h2>Customer Registration</h2>
+  <form id="registerForm">
+    <input type="text" id="regName" placeholder="Full Name" required>
+    <input type="email" id="regEmail" placeholder="Email" required>
+    <input type="tel" id="regPhone" placeholder="Phone Number" required>
+    <input type="password" id="regPassword" placeholder="Password" required>
+    <button type="submit" class="button-primary">Register</button>
+  </form>
+</section>
 
-  <footer>
-    &copy; 2025 Nation Bike Spare Part & Workshop. All rights reserved.
-  </footer>
+<!-- Login Section -->
+<section id="login" class="section">
+  <h2>Customer Login</h2>
+  <form id="loginForm">
+    <input type="email" id="loginEmail" placeholder="Email" required>
+    <input type="password" id="loginPassword" placeholder="Password" required>
+    <button type="submit" class="button-primary">Login</button>
+  </form>
+</section>
 
-  <!-- Firebase Auth Script -->
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDGGuoM1RCdV-n9pkmw_c6wvGoejnu6rOE",
-      authDomain: "nation-bike.firebaseapp.com",
-      projectId: "nation-bike",
-      storageBucket: "nation-bike.firebasestorage.app",
-      messagingSenderId: "25249080743",
-      appId: "1:25249080743:web:238adc1be73839fa740282"
-    };
+<!-- Dashboard Section -->
+<section id="dashboard" class="section" style="display: none;">
+  <h2>Welcome, <span id="userName"></span></h2>
+  <p><strong>Email:</strong> <span id="userEmail"></span></p>
+  <p><strong>Phone:</strong> <span id="userPhone"></span></p>
+  <p><strong>Service History:</strong></p>
+  <ul id="serviceHistory"></ul>
+  <button onclick="logout()" class="button-primary">Logout</button>
+</section>
 
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
-    // Register
-    document.getElementById('registerForm').onsubmit = (e) => {
-      e.preventDefault();
-      const email = document.getElementById('regEmail').value;
-      const password = document.getElementById('regPassword').value;
-      const name = document.getElementById('regName').value;
-      auth.createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
-          alert("Registration Successful");
-          document.getElementById('userName').innerText = name;
-          document.getElementById('registerForm').style.display = 'none';
-          document.getElementById('loginForm').style.display = 'none';
-          document.getElementById('userDashboard').style.display = 'block';
-        })
-        .catch(error => alert(error.message));
-    };
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDGGuoM1RCdV-n9pkmw_c6wvGoejnu6rOE",
+    authDomain: "nation-bike.firebaseapp.com",
+    projectId: "nation-bike",
+    storageBucket: "nation-bike.firebasestorage.app",
+    messagingSenderId: "25249080743",
+    appId: "1:25249080743:web:238adc1be73839fa740282"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 
-    // Login
-    document.getElementById('loginForm').onsubmit = (e) => {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-      auth.signInWithEmailAndPassword(email, password)
-        .then(userCredential => {
-          alert("Login Successful");
-          document.getElementById('loginForm').style.display = 'none';
-          document.getElementById('registerForm').style.display = 'none';
-          document.getElementById('userDashboard').style.display = 'block';
-          document.getElementById('userName').innerText = userCredential.user.email;
-        })
-        .catch(error => alert(error.message));
-    };
+  // Registration
+  document.getElementById("registerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("regName").value;
+    const email = document.getElementById("regEmail").value;
+    const phone = document.getElementById("regPhone").value;
+    const password = document.getElementById("regPassword").value;
 
-    function logout() {
-      auth.signOut().then(() => {
-        alert("Logged Out");
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'block';
-        document.getElementById('userDashboard').style.display = 'none';
+    auth.createUserWithEmailAndPassword(email, password).then(user => {
+      db.collection("users").doc(user.user.uid).set({
+        name: name,
+        email: email,
+        phone: phone,
+        history: []
       });
-    }
+      alert("Registration successful!");
+    }).catch(error => alert(error.message));
+  });
 
-    // Set min date on booking
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("appointment-date").setAttribute("min", today);
-  </script>
+  // Login
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    auth.signInWithEmailAndPassword(email, password).then(user => {
+      showDashboard(user.user.uid);
+    }).catch(error => alert(error.message));
+  });
+
+  // Logout
+  function logout() {
+    auth.signOut().then(() => {
+      document.getElementById("dashboard").style.display = "none";
+      alert("Logged out.");
+    });
+  }
+
+  // Show Dashboard
+  function showDashboard(uid) {
+    db.collection("users").doc(uid).get().then(doc => {
+      const data = doc.data();
+      document.getElementById("userName").innerText = data.name;
+      document.getElementById("userEmail").innerText = data.email;
+      document.getElementById("userPhone").innerText = data.phone;
+      const history = data.history || [];
+      document.getElementById("serviceHistory").innerHTML = history.map(h => `<li>${h}</li>`).join('');
+      document.getElementById("dashboard").style.display = "block";
+    });
+  }
+</script>
+
 </body>
 </html>
