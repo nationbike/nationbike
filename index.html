@@ -111,7 +111,15 @@
 </section>
 
 <script>
-  <!-- Contact Section -->
+  // Auto-fill date range for 7 days forward
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 7);
+  const formatDate = d => d.toISOString().split("T")[0];
+  document.getElementById("appointmentDate").min = formatDate(today);
+  document.getElementById("appointmentDate").max = formatDate(maxDate);
+</script>
+<!-- Contact Section -->
 <section id="contact" class="section">
   <h2>Contact Us</h2>
   <p>Phone: <a href="tel:7762934833">7762934833</a></p>
@@ -242,11 +250,3 @@
 
 </body>
 </html>
-  // Auto-fill date range for 7 days forward
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 7);
-  const formatDate = d => d.toISOString().split("T")[0];
-  document.getElementById("appointmentDate").min = formatDate(today);
-  document.getElementById("appointmentDate").max = formatDate(maxDate);
-</script>
