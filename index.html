@@ -24,6 +24,9 @@
       background-color: #005f99;
       padding: 10px;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
     nav a {
       color: white;
@@ -102,97 +105,65 @@
   <h1>Welcome to Nation Bike</h1>
   <p>Your trusted partner for all bike repair & spare parts needs.</p>
 </div>
-
-<!-- Search Section -->
-<section id="search" class="section">
+<!-- Search Spare Parts Section -->
+<div class="section" id="search">
   <h2>Search Spare Parts</h2>
   <div class="search-container">
-    <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, Castrol 10W40, etc...">
-    <button class="search-button"><i class="fas fa-search"></i></button>
+    <input type="text" id="searchInput" placeholder="Search for parts like brake pad, engine oil...">
+    <button class="search-button" onclick="searchParts()">Search</button>
   </div>
-</section>
+  <ul id="suggestions" style="margin-top: 10px;"></ul>
+</div>
 
-<!-- Booking Section -->
-<section id="book" class="section">
+<!-- Booking Form -->
+<div class="section" id="book">
   <h2>Book a Service</h2>
-  <form id="bookingForm" action="https://formspree.io/f/xqapgvol" method="POST">
-    <input type="text" name="name" placeholder="Full Name" required>
-    <input type="tel" name="phone" placeholder="Phone Number" required>
-    <select name="service" required>
-      <option value="">Select Service</option>
-      <option>General Service</option>
-      <option>Engine Repair</option>
-      <option>Oil Change</option>
-      <option>Chain Adjustment</option>
-      <option>Brake Check</option>
-      <option>Other</option>
-    </select>
-    <textarea name="description" placeholder="Describe your issue or request (optional)"></textarea>
-    <label>Choose Appointment Date</label>
-    <input type="date" name="date" min="" max="" required id="appointmentDate">
-    <button class="button-primary" type="submit">Submit Booking</button>
+  <form action="https://formspree.io/f/xqapgvol" method="POST">
+    <input type="text" name="name" placeholder="Your Full Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="tel" name="phone" placeholder="Phone Number" required />
+    <textarea name="message" placeholder="Service details..." required></textarea>
+    <button class="button-primary" type="submit">Book Now</button>
   </form>
-</section>
-
-<script>
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 7);
-  const formatDate = d => d.toISOString().split("T")[0];
-  document.getElementById("appointmentDate").min = formatDate(today);
-  document.getElementById("appointmentDate").max = formatDate(maxDate);
-</script>
+</div>
 
 <!-- Testimonials -->
-<section id="testimonials" class="section">
+<div class="section" id="testimonials">
   <h2>Customer Testimonials</h2>
-  <blockquote>"Nation Bike fixed my engine issue in a day! Super fast and reliable." – Rakesh Kumar</blockquote>
-  <blockquote>"Great service and genuine spare parts. I only trust them now." – Anjali Singh</blockquote>
-</section>
-
+  <blockquote>"Nation Bike fixed my bike in just one day. Highly recommended!" – Rajesh Kumar</blockquote>
+  <blockquote>"Great service and genuine parts!" – Pooja Singh</blockquote>
+</div>
 <!-- Registration Section -->
-<section id="register" class="section">
+<div class="section" id="register">
   <h2>Customer Registration</h2>
   <form id="registerForm">
-    <input type="text" id="regName" placeholder="Full Name" required>
-    <input type="email" id="regEmail" placeholder="Email" required>
-    <input type="tel" id="regPhone" placeholder="Phone Number" required>
-    <input type="password" id="regPassword" placeholder="Password" required>
+    <input type="text" id="regName" placeholder="Full Name" required />
+    <input type="email" id="regEmail" placeholder="Email" required />
+    <input type="tel" id="regPhone" placeholder="Phone Number" required />
+    <input type="password" id="regPassword" placeholder="Password" required />
     <button type="submit" class="button-primary">Register</button>
   </form>
-</section>
+</div>
 
 <!-- Login Section -->
-<section id="login" class="section">
+<div class="section" id="login">
   <h2>Customer Login</h2>
   <form id="loginForm">
-    <input type="email" id="loginEmail" placeholder="Email" required>
-    <input type="password" id="loginPassword" placeholder="Password" required>
+    <input type="email" id="loginEmail" placeholder="Email" required />
+    <input type="password" id="loginPassword" placeholder="Password" required />
     <button type="submit" class="button-primary">Login</button>
   </form>
-</section>
+</div>
 
 <!-- Dashboard Section -->
-<section id="dashboard" class="section" style="display: none;">
+<div class="section" id="dashboard" style="display: none;">
   <h2>Welcome, <span id="userName"></span></h2>
   <p><strong>Email:</strong> <span id="userEmail"></span></p>
   <p><strong>Phone:</strong> <span id="userPhone"></span></p>
   <p><strong>Service History:</strong></p>
   <ul id="serviceHistory"></ul>
   <button onclick="logout()" class="button-primary">Logout</button>
-</section>
-
-<!-- WhatsApp Chat -->
-<script>
-  window.onload = function () {
-    const chatBtn = document.createElement("a");
-    chatBtn.href = "https://wa.me/917762934833";
-    chatBtn.target = "_blank";
-    chatBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Chat with Us';
-    chatBtn.style = "position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:10px 15px; border-radius:50px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #888;";
-    document.body.appendChild(chatBtn);
-  };
-</script>
+</div>
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -221,10 +192,7 @@
 
     auth.createUserWithEmailAndPassword(email, password).then(user => {
       db.collection("users").doc(user.user.uid).set({
-        name: name,
-        email: email,
-        phone: phone,
-        history: []
+        name, email, phone, history: []
       });
       alert("Registration successful!");
     }).catch(error => alert(error.message));
@@ -259,65 +227,199 @@
     });
   }
 </script>
+<!-- Search Spare Parts -->
+<div class="section" id="search">
+  <h2>Search Spare Parts</h2>
+  <input type="text" id="searchInput" placeholder="Search parts..." oninput="showSuggestions()" />
+  <div id="suggestions" class="suggestion-box"></div>
+</div>
 
-<!-- Search Functionality -->
 <script>
-  const spareParts = [
-    "Engine Oil", "Brake Pads", "Castrol 10W40", "Spark Plug", "Air Filter",
-    "Chain Sprocket", "Disc Brake", "Clutch Cable", "Headlight Bulb", "Indicator",
-    "Battery", "Tyre", "Fuel Pump", "Oil Filter", "Yamaha Lube", "Honda Genuine Oil"
+  const parts = [
+    "Engine Oil", "Brake Pad", "Air Filter", "Clutch Plate", "Spark Plug", "Chain Sprocket",
+    "Headlight", "Indicator", "Battery", "Tyre", "Seat Cover", "Mirror", "Horn", "Coolant", "Cable Kit"
   ];
 
-  const input = document.getElementById("partSearch");
-  const searchBtn = document.querySelector(".search-button");
+  function showSuggestions() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const suggestionBox = document.getElementById("suggestions");
+    suggestionBox.innerHTML = '';
+    if (input.length === 0) return;
 
-  input.addEventListener("input", () => {
-    const value = input.value.toLowerCase();
-    const suggestions = spareParts.filter(part => part.toLowerCase().includes(value));
-    let suggestionHTML = "";
-    if (value && suggestions.length) {
-      suggestionHTML = suggestions.map(s => `<div class="suggestion-item">${s}</div>`).join("");
-    }
-    showSuggestions(suggestionHTML);
-  });
-
-  function showSuggestions(html) {
-    let box = document.getElementById("suggestionBox");
-    if (!box) {
-      box = document.createElement("div");
-      box.id = "suggestionBox";
-      box.style = "background: #fff; border: 1px solid #ccc; border-radius: 8px; position: absolute; width: calc(100% - 60px); max-height: 150px; overflow-y: auto; z-index: 1000;";
-      input.parentNode.appendChild(box);
-    }
-    box.innerHTML = html;
-    document.querySelectorAll(".suggestion-item").forEach(item => {
-      item.style.padding = "10px";
-      item.style.cursor = "pointer";
-      item.addEventListener("click", () => {
-        input.value = item.textContent;
-        box.innerHTML = "";
-      });
-    });
+    const filtered = parts.filter(part => part.toLowerCase().includes(input));
+    suggestionBox.innerHTML = filtered.map(p => `<div class="suggestion-item">${p}</div>`).join('');
   }
-
-  searchBtn.addEventListener("click", () => {
-    const query = input.value.trim().toLowerCase();
-    const found = spareParts.find(p => p.toLowerCase() === query);
-    if (found) {
-      alert(`"${found}" is available!`);
-    } else {
-      alert("Part not found. Please check spelling or try another keyword.");
-    }
-  });
 </script>
 
+<style>
+  .suggestion-box {
+    background: #e6f7ff;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-top: 5px;
+    padding: 5px;
+  }
+  .suggestion-item {
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  .suggestion-item:hover {
+    background-color: #d0ebff;
+  }
+</style>
+
+<!-- WhatsApp Chat -->
+<a href="https://wa.me/917762934833" class="whatsapp-float" target="_blank">
+  <img src="https://img.icons8.com/ios-filled/50/000000/whatsapp.png" alt="Chat" style="width:50px;">
+</a>
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+  }
+</style>
+
 <!-- Contact Section -->
-<section id="contact" class="section">
+<div class="section" id="contact">
   <h2>Contact Us</h2>
-  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
   <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
-  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
-</section>
+  <p>Phone: <a href="tel:+917762934833">+91 7762934833</a></p>
+</div>
+
+<!-- Google Map -->
+<div class="section" id="map">
+  <h2>Visit Us</h2>
+  <iframe
+    src="https://www.google.com/maps?q=26.8069560,84.5092640&z=15&output=embed"
+    width="100%"
+    height="300"
+    style="border:0; border-radius:12px;"
+    allowfullscreen=""
+    loading="lazy">
+  </iframe>
+</div>
+<!-- Customer Testimonials -->
+<div class="section" id="testimonials">
+  <h2>What Our Customers Say</h2>
+  <div class="testimonial">
+    <p>"Excellent service! My bike feels brand new again." – Rohit K.</p>
+  </div>
+  <div class="testimonial">
+    <p>"Quick repair and genuine parts. Highly recommended." – Suman J.</p>
+  </div>
+  <div class="testimonial">
+    <p>"Booking online was so easy. Loved the service." – Neha S.</p>
+  </div>
+</div>
+
+<style>
+  .testimonial {
+    background: #f0faff;
+    padding: 15px;
+    margin: 10px auto;
+    border-left: 5px solid #0099ff;
+    border-radius: 10px;
+    max-width: 600px;
+    font-style: italic;
+  }
+</style>
+
+<!-- Image Gallery -->
+<div class="section" id="gallery">
+  <h2>Workshop & Parts Gallery</h2>
+  <div class="gallery-grid">
+    <img src="https://via.placeholder.com/200x150" alt="Workshop 1" />
+    <img src="https://via.placeholder.com/200x150" alt="Workshop 2" />
+    <img src="https://via.placeholder.com/200x150" alt="Spare Parts" />
+    <img src="https://via.placeholder.com/200x150" alt="Servicing" />
+  </div>
+</div>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+  }
+  .gallery-grid img {
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+  }
+</style>
+<!-- Blog/Tips Section -->
+<div class="section" id="blog">
+  <h2>Bike Maintenance Tips</h2>
+  <ul>
+    <li>Check engine oil every 1000km</li>
+    <li>Clean your air filter monthly</li>
+    <li>Inspect brake pads regularly</li>
+    <li>Lubricate chain every 500km</li>
+  </ul>
+</div>
+
+<!-- Map Section -->
+<div class="section" id="location">
+  <h2>Find Us</h2>
+  <iframe
+    src="https://www.google.com/maps?q=26.8069560,84.5092640&hl=es;z=14&output=embed"
+    width="100%"
+    height="250"
+    frameborder="0"
+    style="border:0; border-radius: 8px;"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<!-- Footer -->
+<footer style="background:#007BFF; color:#fff; padding:20px; text-align:center;">
+  <p>&copy; 2025 Nation Bike Spare Part & Workshop, Bettiah</p>
+  <p>Contact: <a href="mailto:Mumtaz007alam@gmail.com" style="color:#fff;">Mumtaz007alam@gmail.com</a> | Phone: <a href="tel:7762934833" style="color:#fff;">7762934833</a></p>
+</footer>
+
+<!-- WhatsApp Chat -->
+<a href="https://wa.me/917762934833" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+  <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp" />
+</a>
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+  }
+</style>
+
+<!-- Firebase App Initialization -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDGGuoM1RCdV-n9pkmw_c6wvGoejnu6rOE",
+    authDomain: "nation-bike.firebaseapp.com",
+    projectId: "nation-bike",
+    storageBucket: "nation-bike.firebasestorage.app",
+    messagingSenderId: "25249080743",
+    appId: "1:25249080743:web:238adc1be73839fa740282"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+</script>
 
 </body>
 </html>
+<!-- Online Purchase Section -->
+<div class="section" id="purchase">
+  <h2>Shop Online</h2>
+  <p>Coming soon: Buy genuine bike spare parts directly from our site!</p>
+  <button style="padding: 10px 20px; background: #0099ff; color: #fff; border: none; border-radius: 6px;">
+    Browse Products
+  </button>
+</div>
