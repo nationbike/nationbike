@@ -31,56 +31,6 @@
       text-decoration: none;
       font-weight: bold;
     }
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-      background-color: #cceeff;
-    }
-    .section {
-      padding: 30px 20px;
-    }
-    h2 {
-      color: #007acc;
-      border-bottom: 2px solid #007acc;
-      padding-bottom: 5px;
-      margin-bottom: 20px;
-    }
-    input, select, textarea, button {
-      padding: 10px;
-      width: 100%;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-    .button-primary {
-      background-color: #007acc;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .button-primary:hover {
-      background-color: #005f99;
-    }
-    .search-container {
-      position: relative;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .search-container input {
-      flex-grow: 1;
-    }
-    .search-button {
-      background-color: #007acc;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .search-button:hover {
-      background-color: #005f99;
-    }
   </style>
 </head>
 <body>
@@ -97,109 +47,111 @@
   <a href="#dashboard">Dashboard</a>
   <a href="#contact">Contact</a>
 </nav>
+<section style="text-align:center; padding: 2rem;">
+  <h2>Welcome to Nation Bike</h2>
+  <p>Your one-stop solution for bike parts and workshop services</p>
+</section>
 
-<div class="hero">
-  <h1>Welcome to Nation Bike</h1>
-  <p>Your trusted partner for all bike repair & spare parts needs.</p>
-</div>
+<section id="search" style="padding: 2rem; background-color: #f0fbff;">
+  <h3 style="text-align: center;">Search Spare Parts</h3>
+  <div style="display: flex; justify-content: center; margin-top: 1rem;">
+    <input type="text" id="searchBox" placeholder="Search for spare parts or oils..." style="padding: 0.5rem; width: 300px;" />
+  </div>
+  <ul id="suggestions" style="text-align: center; list-style: none; padding: 0; margin-top: 1rem;"></ul>
+</section>
 
-<!-- Search Section -->
-<section id="search" class="section">
-  <h2>Search Spare Parts</h2>
-  <div class="search-container">
-    <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, Castrol 10W40, etc...">
-    <button class="search-button"><i class="fas fa-search"></i></button>
+<script>
+  const parts = [
+    "Engine Oil", "Brake Pads", "Air Filter", "Oil Filter", "Chain Set",
+    "Spark Plug", "Clutch Plate", "Headlight", "Tail Light", "Indicator",
+    "Battery", "Tyre", "Mirror", "Gear Oil", "Front Fork Oil", "Coolant"
+  ];
+
+  const searchBox = document.getElementById("searchBox");
+  const suggestions = document.getElementById("suggestions");
+
+  searchBox.addEventListener("input", () => {
+    const input = searchBox.value.toLowerCase();
+    suggestions.innerHTML = "";
+    if (input.length > 0) {
+      const filtered = parts.filter(part => part.toLowerCase().includes(input));
+      filtered.forEach(part => {
+        const li = document.createElement("li");
+        li.textContent = part;
+        suggestions.appendChild(li);
+      });
+    }
+  });
+</script>
+<section id="booking" style="padding: 2rem;">
+  <h3 style="text-align: center;">Online Booking</h3>
+  <form action="https://formspree.io/f/xqapgvol" method="POST" style="max-width: 500px; margin: auto;">
+    <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem;" />
+    <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem;" />
+    <input type="text" name="phone" placeholder="Your Phone" required style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem;" />
+    <textarea name="message" placeholder="Service Required" required style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem;"></textarea>
+    <button type="submit" style="padding: 0.5rem 1rem; background-color: #2196f3; color: white; border: none;">Book Now</button>
+  </form>
+</section>
+
+<a href="https://wa.me/917762934833" style="position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; padding: 10px 15px; border-radius: 50%; font-size: 24px; text-align: center; text-decoration: none;" target="_blank">
+  &#x1F4AC;
+</a>
+
+<section id="testimonials" style="padding: 2rem; background-color: #e3f2fd;">
+  <h3 style="text-align: center;">Customer Testimonials</h3>
+  <div style="max-width: 700px; margin: auto; text-align: center;">
+    <blockquote style="margin: 1rem 0;">
+      "Great service and original parts. Highly recommend!"<br><strong>- Rajesh</strong>
+    </blockquote>
+    <blockquote style="margin: 1rem 0;">
+      "Fast booking and helpful staff. Will visit again."<br><strong>- Priya</strong>
+    </blockquote>
+  </div>
+</section>
+<section id="gallery" style="padding: 2rem;">
+  <h3 style="text-align: center;">Gallery</h3>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+    <img src="image1.jpg" alt="Spare Part 1" style="width: 200px; border-radius: 8px;" />
+    <img src="image2.jpg" alt="Workshop" style="width: 200px; border-radius: 8px;" />
+    <img src="image3.jpg" alt="Service Area" style="width: 200px; border-radius: 8px;" />
   </div>
 </section>
 
-<!-- Booking Section -->
-<section id="book" class="section">
-  <h2>Book a Service</h2>
-  <form id="bookingForm" action="https://formspree.io/f/xqapgvol" method="POST">
-    <input type="text" name="name" placeholder="Full Name" required>
-    <input type="tel" name="phone" placeholder="Phone Number" required>
-    <select name="service" required>
-      <option value="">Select Service</option>
-      <option>General Service</option>
-      <option>Engine Repair</option>
-      <option>Oil Change</option>
-      <option>Chain Adjustment</option>
-      <option>Brake Check</option>
-      <option>Other</option>
-    </select>
-    <textarea name="description" placeholder="Describe your issue or request (optional)"></textarea>
-    <label>Choose Appointment Date</label>
-    <input type="date" name="date" min="" max="" required id="appointmentDate">
-    <button class="button-primary" type="submit">Submit Booking</button>
-  </form>
+<section id="purchase" style="padding: 2rem; background-color: #e1f5fe;">
+  <h3 style="text-align: center;">Online Purchase</h3>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+    <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
+      <h4>Engine Oil</h4>
+      <p>Price: ₹400</p>
+      <button style="padding: 0.5rem 1rem; background-color: #2196f3; color: white; border: none;">Buy Now</button>
+    </div>
+    <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
+      <h4>Brake Pads</h4>
+      <p>Price: ₹250</p>
+      <button style="padding: 0.5rem 1rem; background-color: #2196f3; color: white; border: none;">Buy Now</button>
+    </div>
+  </div>
 </section>
 
-<script>
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 7);
-  const formatDate = d => d.toISOString().split("T")[0];
-  document.getElementById("appointmentDate").min = formatDate(today);
-  document.getElementById("appointmentDate").max = formatDate(maxDate);
-</script>
-
-<!-- Testimonials -->
-<section id="testimonials" class="section">
-  <h2>Customer Testimonials</h2>
-  <blockquote>"Nation Bike fixed my engine issue in a day! Super fast and reliable." – Rakesh Kumar</blockquote>
-  <blockquote>"Great service and genuine spare parts. I only trust them now." – Anjali Singh</blockquote>
+<section id="map" style="padding: 2rem;">
+  <h3 style="text-align: center;">Find Us</h3>
+  <div style="text-align: center;">
+    <iframe src="https://www.google.com/maps?q=26.8069560,84.5092640&z=15&output=embed" width="100%" height="300" frameborder="0" style="border:0; border-radius: 8px;" allowfullscreen></iframe>
+  </div>
 </section>
 
-<!-- Registration Section -->
-<section id="register" class="section">
-  <h2>Customer Registration</h2>
-  <form id="registerForm">
-    <input type="text" id="regName" placeholder="Full Name" required>
-    <input type="email" id="regEmail" placeholder="Email" required>
-    <input type="tel" id="regPhone" placeholder="Phone Number" required>
-    <input type="password" id="regPassword" placeholder="Password" required>
-    <button type="submit" class="button-primary">Register</button>
-  </form>
+<section id="contact" style="padding: 2rem; background-color: #e3f2fd;">
+  <h3 style="text-align: center;">Contact Us</h3>
+  <p style="text-align: center;">Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a><br>Phone: <a href="tel:+917762934833">+91 7762934833</a></p>
 </section>
+<!-- Firebase Configuration -->
+<script type="module">
+  // Import Firebase modules
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-<!-- Login Section -->
-<section id="login" class="section">
-  <h2>Customer Login</h2>
-  <form id="loginForm">
-    <input type="email" id="loginEmail" placeholder="Email" required>
-    <input type="password" id="loginPassword" placeholder="Password" required>
-    <button type="submit" class="button-primary">Login</button>
-  </form>
-</section>
-
-<!-- Dashboard Section -->
-<section id="dashboard" class="section" style="display: none;">
-  <h2>Welcome, <span id="userName"></span></h2>
-  <p><strong>Email:</strong> <span id="userEmail"></span></p>
-  <p><strong>Phone:</strong> <span id="userPhone"></span></p>
-  <p><strong>Service History:</strong></p>
-  <ul id="serviceHistory"></ul>
-  <button onclick="logout()" class="button-primary">Logout</button>
-</section>
-
-<!-- WhatsApp Chat -->
-<script>
-  window.onload = function () {
-    const chatBtn = document.createElement("a");
-    chatBtn.href = "https://wa.me/917762934833";
-    chatBtn.target = "_blank";
-    chatBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Chat with Us';
-    chatBtn.style = "position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:10px 15px; border-radius:50px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #888;";
-    document.body.appendChild(chatBtn);
-  };
-</script>
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-
-<script>
   const firebaseConfig = {
     apiKey: "AIzaSyDGGuoM1RCdV-n9pkmw_c6wvGoejnu6rOE",
     authDomain: "nation-bike.firebaseapp.com",
@@ -208,116 +160,286 @@
     messagingSenderId: "25249080743",
     appId: "1:25249080743:web:238adc1be73839fa740282"
   };
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
 
-  document.getElementById("registerForm").addEventListener("submit", function(e) {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Register User
+  document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = document.getElementById("regName").value;
     const email = document.getElementById("regEmail").value;
     const phone = document.getElementById("regPhone").value;
     const password = document.getElementById("regPassword").value;
 
-    auth.createUserWithEmailAndPassword(email, password).then(user => {
-      db.collection("users").doc(user.user.uid).set({
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      await setDoc(doc(db, "users", user.uid), {
         name: name,
         email: email,
         phone: phone,
-        history: []
+        uid: user.uid
       });
       alert("Registration successful!");
-    }).catch(error => alert(error.message));
+    } catch (error) {
+      alert(error.message);
+    }
   });
 
-  document.getElementById("loginForm").addEventListener("submit", function(e) {
+  // Login User
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
+    const email = document.getElementById("logEmail").value;
+    const password = document.getElementById("logPassword").value;
 
-    auth.signInWithEmailAndPassword(email, password).then(user => {
-      showDashboard(user.user.uid);
-    }).catch(error => alert(error.message));
-  });
-
-  function logout() {
-    auth.signOut().then(() => {
-      document.getElementById("dashboard").style.display = "none";
-      alert("Logged out.");
-    });
-  }
-
-  function showDashboard(uid) {
-    db.collection("users").doc(uid).get().then(doc => {
-      const data = doc.data();
-      document.getElementById("userName").innerText = data.name;
-      document.getElementById("userEmail").innerText = data.email;
-      document.getElementById("userPhone").innerText = data.phone;
-      const history = data.history || [];
-      document.getElementById("serviceHistory").innerHTML = history.map(h => `<li>${h}</li>`).join('');
-      document.getElementById("dashboard").style.display = "block";
-    });
-  }
-</script>
-
-<!-- Search Functionality -->
-<script>
-  const spareParts = [
-    "Engine Oil", "Brake Pads", "Castrol 10W40", "Spark Plug", "Air Filter",
-    "Chain Sprocket", "Disc Brake", "Clutch Cable", "Headlight Bulb", "Indicator",
-    "Battery", "Tyre", "Fuel Pump", "Oil Filter", "Yamaha Lube", "Honda Genuine Oil"
-  ];
-
-  const input = document.getElementById("partSearch");
-  const searchBtn = document.querySelector(".search-button");
-
-  input.addEventListener("input", () => {
-    const value = input.value.toLowerCase();
-    const suggestions = spareParts.filter(part => part.toLowerCase().includes(value));
-    let suggestionHTML = "";
-    if (value && suggestions.length) {
-      suggestionHTML = suggestions.map(s => `<div class="suggestion-item">${s}</div>`).join("");
-    }
-    showSuggestions(suggestionHTML);
-  });
-
-  function showSuggestions(html) {
-    let box = document.getElementById("suggestionBox");
-    if (!box) {
-      box = document.createElement("div");
-      box.id = "suggestionBox";
-      box.style = "background: #fff; border: 1px solid #ccc; border-radius: 8px; position: absolute; width: calc(100% - 60px); max-height: 150px; overflow-y: auto; z-index: 1000;";
-      input.parentNode.appendChild(box);
-    }
-    box.innerHTML = html;
-    document.querySelectorAll(".suggestion-item").forEach(item => {
-      item.style.padding = "10px";
-      item.style.cursor = "pointer";
-      item.addEventListener("click", () => {
-        input.value = item.textContent;
-        box.innerHTML = "";
-      });
-    });
-  }
-
-  searchBtn.addEventListener("click", () => {
-    const query = input.value.trim().toLowerCase();
-    const found = spareParts.find(p => p.toLowerCase() === query);
-    if (found) {
-      alert(`"${found}" is available!`);
-    } else {
-      alert("Part not found. Please check spelling or try another keyword.");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login successful!");
+      window.location.href = "#dashboard"; // Redirect or show dashboard
+    } catch (error) {
+      alert(error.message);
     }
   });
 </script>
 
-<!-- Contact Section -->
-<section id="contact" class="section">
-  <h2>Contact Us</h2>
-  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
-  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
-  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
+<!-- Registration Form -->
+<section id="customer" style="padding: 2rem; background-color: #bbdefb;">
+  <h3 style="text-align: center;">Customer Area</h3>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
+    <form id="registerForm" style="max-width: 300px;">
+      <h4>Register</h4>
+      <input type="text" id="regName" placeholder="Full Name" required /><br />
+      <input type="email" id="regEmail" placeholder="Email" required /><br />
+      <input type="tel" id="regPhone" placeholder="Phone Number" required /><br />
+      <input type="password" id="regPassword" placeholder="Password" required /><br />
+      <button type="submit" style="margin-top: 0.5rem;">Register</button>
+    </form>
+
+    <!-- Login Form -->
+    <form id="loginForm" style="max-width: 300px;">
+      <h4>Login</h4>
+      <input type="email" id="logEmail" placeholder="Email" required /><br />
+      <input type="password" id="logPassword" placeholder="Password" required /><br />
+      <button type="submit" style="margin-top: 0.5rem;">Login</button>
+    </form>
+  </div>
+</section>
+<!-- Customer Dashboard Section -->
+<section id="dashboard" style="padding: 2rem; background-color: #e3f2fd; display: none;">
+  <h3 style="text-align: center;">Customer Dashboard</h3>
+  <div id="dashboardContent" style="max-width: 900px; margin: auto;">
+    <p><strong>Welcome:</strong> <span id="userNameDisplay"></span></p>
+    
+    <!-- Service History -->
+    <h4>Service History</h4>
+    <ul id="serviceHistoryList"></ul>
+
+    <!-- Digital Invoices -->
+    <h4>Invoices</h4>
+    <ul id="invoiceList"></ul>
+
+    <button onclick="logoutUser()">Logout</button>
+  </div>
 </section>
 
-</body>
-</html>
+<script type="module">
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+  const auth = getAuth();
+  const db = getFirestore();
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      document.getElementById("dashboard").style.display = "block";
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      document.getElementById("userNameDisplay").innerText = userDoc.data().name;
+
+      // Load Service History
+      const servicesSnap = await getDocs(collection(db, "users", user.uid, "services"));
+      const serviceList = document.getElementById("serviceHistoryList");
+      serviceList.innerHTML = "";
+      servicesSnap.forEach(doc => {
+        serviceList.innerHTML += `<li>${doc.data().date} - ${doc.data().details}</li>`;
+      });
+
+      // Load Invoices
+      const invoicesSnap = await getDocs(collection(db, "users", user.uid, "invoices"));
+      const invoiceList = document.getElementById("invoiceList");
+      invoiceList.innerHTML = "";
+      invoicesSnap.forEach(doc => {
+        invoiceList.innerHTML += `<li>${doc.data().invoiceNo} - ₹${doc.data().amount}</li>`;
+      });
+    } else {
+      document.getElementById("dashboard").style.display = "none";
+    }
+  });
+
+  function logoutUser() {
+    signOut(auth).then(() => {
+      alert("Logged out!");
+      window.location.href = "#customer";
+    });
+  }
+</script>
+<!-- Admin Dashboard Section -->
+<section id="adminDashboard" style="padding: 2rem; background: #d0f0fd; display: none;">
+  <h3 style="text-align: center;">Admin Dashboard</h3>
+  <div style="max-width: 1000px; margin: auto;">
+    <h4>Real-time Bookings</h4>
+    <ul id="bookingList"></ul>
+  </div>
+</section>
+
+<!-- Product Showcase + Cart -->
+<section id="productShowcase" style="padding: 2rem; background: #e1f5fe;">
+  <h3 style="text-align: center;">Our Products</h3>
+  <div id="productList" style="display: flex; flex-wrap: wrap; justify-content: center;"></div>
+  <div style="text-align: center; margin-top: 1rem;">
+    <button onclick="viewCart()">View Cart</button>
+  </div>
+</section>
+
+<!-- Cart Modal -->
+<div id="cartModal" style="display:none; position:fixed; top:10%; left:10%; width:80%; background:white; border-radius:10px; padding:1rem; box-shadow:0 0 20px rgba(0,0,0,0.3); z-index:1000;">
+  <h3>Your Cart</h3>
+  <ul id="cartItems"></ul>
+  <button onclick="closeCart()">Close</button>
+</div>
+
+<script type="module">
+  import { getFirestore, collection, getDocs, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+  const db = getFirestore();
+  const auth = getAuth();
+  let cart = [];
+
+  // Load Products
+  const productList = document.getElementById("productList");
+  const productSnap = await getDocs(collection(db, "products"));
+  productSnap.forEach(doc => {
+    const item = doc.data();
+    const div = document.createElement("div");
+    div.style = "border:1px solid #ccc; margin:10px; padding:1rem; border-radius:10px; width:200px; text-align:center;";
+    div.innerHTML = `<h4>${item.name}</h4><p>₹${item.price}</p><button onclick='addToCart("${item.name}", ${item.price})'>Add to Cart</button>`;
+    productList.appendChild(div);
+  });
+
+  // Add to cart
+  window.addToCart = function(name, price) {
+    cart.push({ name, price });
+    alert(`${name} added to cart!`);
+  }
+
+  // View cart
+  window.viewCart = function() {
+    document.getElementById("cartModal").style.display = "block";
+    const list = document.getElementById("cartItems");
+    list.innerHTML = "";
+    cart.forEach(item => {
+      list.innerHTML += `<li>${item.name} - ₹${item.price}</li>`;
+    });
+  }
+
+  window.closeCart = function() {
+    document.getElementById("cartModal").style.display = "none";
+  }
+
+  // Admin View Real-time Booking
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists() && userDoc.data().role === "admin") {
+        document.getElementById("adminDashboard").style.display = "block";
+        const bookingsRef = collection(db, "bookings");
+        onSnapshot(bookingsRef, (snapshot) => {
+          const bookingList = document.getElementById("bookingList");
+          bookingList.innerHTML = "";
+          snapshot.forEach(doc => {
+            const b = doc.data();
+            bookingList.innerHTML += `<li>${b.name} - ${b.date} - ${b.service}</li>`;
+          });
+        });
+      }
+    }
+  });
+</script>
+<!-- Chatbot Assistant -->
+<section id="chatbot" style="position:fixed; bottom:10px; right:10px;">
+  <button onclick="toggleChat()" style="background:#03a9f4; color:white; border:none; border-radius:50%; width:50px; height:50px;">?</button>
+  <div id="chatWindow" style="display:none; background:white; width:300px; height:400px; border-radius:10px; box-shadow:0 0 10px gray; padding:1rem; overflow-y:auto;">
+    <h4>Help Assistant</h4>
+    <div id="chatLog" style="height:300px; overflow:auto; font-size:0.9rem;"></div>
+    <input type="text" id="chatInput" placeholder="Ask something..." style="width:100%; padding:5px;" onkeydown="if(event.key==='Enter')sendMessage()">
+  </div>
+</section>
+
+<script>
+  function toggleChat() {
+    const chat = document.getElementById("chatWindow");
+    chat.style.display = chat.style.display === "none" ? "block" : "none";
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("chatInput");
+    const log = document.getElementById("chatLog");
+    const userMsg = input.value;
+    if (!userMsg) return;
+    log.innerHTML += `<div><b>You:</b> ${userMsg}</div>`;
+    let botReply = "Please wait...";
+    if (userMsg.toLowerCase().includes("price")) botReply = "Please check our product section for updated prices.";
+    else if (userMsg.toLowerCase().includes("location")) botReply = "We are located at Bettiah, check the map section!";
+    else botReply = "Our team will respond shortly. You can also call 7762934833.";
+
+    setTimeout(() => {
+      log.innerHTML += `<div><b>Bot:</b> ${botReply}</div>`;
+      input.value = "";
+    }, 500);
+  }
+</script>
+
+<!-- Blog Section -->
+<section id="blog" style="padding: 2rem; background: #e3f2fd;">
+  <h3 style="text-align: center;">Tips & Updates</h3>
+  <article style="max-width: 800px; margin:auto;">
+    <h4>How to Maintain Your Bike Engine?</h4>
+    <p>Regular oil changes and air filter cleaning are essential to keep your engine smooth and long-lasting.</p>
+    <hr>
+    <h4>Top 5 Must-Have Bike Accessories</h4>
+    <p>Explore our store for helmets, mobile holders, anti-theft locks, and more essentials!</p>
+  </article>
+</section>
+
+<!-- Language Switch (Hindi/English Toggle) -->
+<section style="text-align:center; padding:1rem;">
+  <button onclick="switchLang('en')">English</button>
+  <button onclick="switchLang('hi')">हिंदी</button>
+</section>
+
+<script>
+  function switchLang(lang) {
+    if (lang === 'hi') {
+      alert("साइट को हिंदी में स्विच किया गया है (यह एक डेमो है - संपूर्ण अनुवाद अगली अपडेट में जोड़ा जाएगा)।");
+    } else {
+      alert("Switched to English.");
+    }
+  }
+</script>
+
+<!-- Push Notifications (Mock Demo) -->
+<script>
+  function showPushNotification(msg) {
+    if ("Notification" in window && Notification.permission === "granted") {
+      new Notification("Nation Bike", { body: msg });
+    }
+  }
+
+  if ("Notification" in window && Notification.permission !== "granted") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") showPushNotification("Welcome to Nation Bike Spare Parts & Workshop!");
+    });
+  }
+</script>
