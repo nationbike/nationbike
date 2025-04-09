@@ -81,42 +81,6 @@
     .search-button:hover {
       background-color: #005f99;
     }
-    #cartSidebar {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 300px;
-      height: 100%;
-      background: #f4f4f4;
-      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-      padding: 20px;
-      transition: right 0.3s ease;
-      z-index: 9999;
-    }
-    #cartSidebar h3 {
-      margin-top: 0;
-    }
-    #cartSidebar button {
-      width: 100%;
-    }
-    #cartSidebar ul {
-      padding-left: 0;
-      list-style-type: none;
-    }
-    #cartSidebar li {
-      padding: 5px 0;
-    }
-    .search-button {
-      background-color: #007acc;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .search-button:hover {
-      background-color: #005f99;
-    }
   </style>
 </head>
 <body>
@@ -230,26 +194,130 @@
   };
 </script>
 
-<!-- Cart Sidebar -->
-<div id="cartSidebar">
-  <h3>Your Cart</h3>
-  <ul id="cartItems"></ul>
-  <p><strong>Total: ₹<span id="cartTotal">0</span></strong></p>
-  <button onclick="checkout()" class="button-primary">Checkout</button>
-  <button onclick="toggleCart()" class="button-primary" style="background:#ccc;">Close</button>
-</div>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
-<!-- Floating Cart Icon -->
-<button onclick="toggleCart()" style="position:fixed; bottom:90px; right:20px; background:#007acc; color:white; border:none; padding:12px 18px; border-radius:50%; box-shadow:0 0 8px rgba(0,0,0,0.2); font-size:20px; z-index:9999;">
-  <i class="fas fa-shopping-cart"></i>
-</button>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDGGuoM1RCdV-n9pkmw_c6wvGoejnu6rOE",
+    authDomain: "nation-bike.firebaseapp.com",
+    projectId: "nation-bike",
+    storageBucket: "nation-bike.firebasestorage.app",
+    messagingSenderId: "25249080743",
+    appId: "1:25249080743:web:238adc1be73839fa740282"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 
-<!-- Product Showcase Section -->
-<section class="section" id="products">
-  <h2>Shop Spare Parts</h2>
-  <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:20px;">
-    <div style="border:1px solid #ccc; padding:15px; border-radius:10px;">
-      <h4>Engine Oil</h4>
-      <p>Price: ₹400</p>
-      <button onclick="addToCart('Engine Oil', 400)" class="button-primary">Add to Cart</button>
-    </div>
+  document.getElementById("registerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("regName").value;
+    const email = document.getElementById("regEmail").value;
+    const phone = document.getElementById("regPhone").value;
+    const password = document.getElementById("regPassword").value;
+
+    auth.createUserWithEmailAndPassword(email, password).then(user => {
+      db.collection("users").doc(user.user.uid).set({
+        name: name,
+        email: email,
+        phone: phone,
+        history: []
+      });
+      alert("Registration successful!");
+    }).catch(error => alert(error.message));
+  });
+
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    auth.signInWithEmailAndPassword(email, password).then(user => {
+      showDashboard(user.user.uid);
+    }).catch(error => alert(error.message));
+  });
+
+  function logout() {
+    auth.signOut().then(() => {
+      document.getElementById("dashboard").style.display = "none";
+      alert("Logged out.");
+    });
+  }
+
+  function showDashboard(uid) {
+    db.collection("users").doc(uid).get().then(doc => {
+      const data = doc.data();
+      document.getElementById("userName").innerText = data.name;
+      document.getElementById("userEmail").innerText = data.email;
+      document.getElementById("userPhone").innerText = data.phone;
+      const history = data.history || [];
+      document.getElementById("serviceHistory").innerHTML = history.map(h => `<li>${h}</li>`).join('');
+      document.getElementById("dashboard").style.display = "block";
+    });
+  }
+</script>
+
+<!-- Search Functionality -->
+<script>
+  const spareParts = [
+    "Engine Oil", "Brake Pads", "Castrol 10W40", "Spark Plug", "Air Filter",
+    "Chain Sprocket", "Disc Brake", "Clutch Cable", "Headlight Bulb", "Indicator",
+    "Battery", "Tyre", "Fuel Pump", "Oil Filter", "Yamaha Lube", "Honda Genuine Oil"
+  ];
+
+  const input = document.getElementById("partSearch");
+  const searchBtn = document.querySelector(".search-button");
+
+  input.addEventListener("input", () => {
+    const value = input.value.toLowerCase();
+    const suggestions = spareParts.filter(part => part.toLowerCase().includes(value));
+    let suggestionHTML = "";
+    if (value && suggestions.length) {
+      suggestionHTML = suggestions.map(s => `<div class="suggestion-item">${s}</div>`).join("");
+    }
+    showSuggestions(suggestionHTML);
+  });
+
+  function showSuggestions(html) {
+    let box = document.getElementById("suggestionBox");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "suggestionBox";
+      box.style = "background: #fff; border: 1px solid #ccc; border-radius: 8px; position: absolute; width: calc(100% - 60px); max-height: 150px; overflow-y: auto; z-index: 1000;";
+      input.parentNode.appendChild(box);
+    }
+    box.innerHTML = html;
+    document.querySelectorAll(".suggestion-item").forEach(item => {
+      item.style.padding = "10px";
+      item.style.cursor = "pointer";
+      item.addEventListener("click", () => {
+        input.value = item.textContent;
+        box.innerHTML = "";
+      });
+    });
+  }
+
+  searchBtn.addEventListener("click", () => {
+    const query = input.value.trim().toLowerCase();
+    const found = spareParts.find(p => p.toLowerCase() === query);
+    if (found) {
+      alert(`"${found}" is available!`);
+    } else {
+      alert("Part not found. Please check spelling or try another keyword.");
+    }
+  });
+</script>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
+  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
+  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
+</section>
+
+</body>
+</html>
