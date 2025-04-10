@@ -19,18 +19,6 @@
       font-size: 2rem;
       font-weight: bold;
       letter-spacing: 1px;
-      position: relative;
-    }
-    .cart-icon {
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      font-size: 20px;
-      background: #fff;
-      color: #007acc;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-weight: bold;
     }
     nav {
       background-color: #005f99;
@@ -93,36 +81,15 @@
     .search-button:hover {
       background-color: #005f99;
     }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-    }
-    .product-card {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 15px;
-      background: #f9f9f9;
-      text-align: center;
-    }
-    .product-card h4 {
-      margin-bottom: 10px;
-    }
-    .product-card button {
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
 
 <header>
   Nation Bike Spare Part & Workshop
-  <div class="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cartCount">0</span></div>
 </header>
-
 <nav>
   <a href="#search">Search Parts</a>
-  <a href="#products">Products</a>
   <a href="#book">Book Service</a>
   <a href="#testimonials">Testimonials</a>
   <a href="#register">Register</a>
@@ -142,28 +109,6 @@
   <div class="search-container">
     <input type="text" id="partSearch" placeholder="Search parts like Engine Oil, Brake Pads, Castrol 10W40, etc...">
     <button class="search-button"><i class="fas fa-search"></i></button>
-  </div>
-</section>
-
-<!-- Product Section -->
-<section id="products" class="section">
-  <h2>Popular Products</h2>
-  <div class="product-grid">
-    <div class="product-card">
-      <h4>Engine Oil</h4>
-      <p>Castrol 10W40</p>
-      <button class="button-primary" onclick="addToCart()">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <h4>Brake Pads</h4>
-      <p>High performance pads</p>
-      <button class="button-primary" onclick="addToCart()">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <h4>Spark Plug</h4>
-      <p>NGK spark plug</p>
-      <button class="button-primary" onclick="addToCart()">Add to Cart</button>
-    </div>
   </div>
 </section>
 
@@ -188,6 +133,15 @@
     <button class="button-primary" type="submit">Submit Booking</button>
   </form>
 </section>
+
+<script>
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 7);
+  const formatDate = d => d.toISOString().split("T")[0];
+  document.getElementById("appointmentDate").min = formatDate(today);
+  document.getElementById("appointmentDate").max = formatDate(maxDate);
+</script>
 
 <!-- Testimonials -->
 <section id="testimonials" class="section">
@@ -228,14 +182,7 @@
   <button onclick="logout()" class="button-primary">Logout</button>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="section">
-  <h2>Contact Us</h2>
-  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
-  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
-</section>
-
-<!-- WhatsApp Chat Button -->
+<!-- WhatsApp Chat -->
 <script>
   window.onload = function () {
     const chatBtn = document.createElement("a");
@@ -252,7 +199,6 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
-<!-- Firebase Configuration and Logic -->
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyDGGuoM1RCdV-n9pkmw_c6wvGoejnu6rOE",
@@ -312,25 +258,9 @@
       document.getElementById("dashboard").style.display = "block";
     });
   }
-
-  // Booking date logic
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 7);
-  const formatDate = d => d.toISOString().split("T")[0];
-  document.getElementById("appointmentDate").min = formatDate(today);
-  document.getElementById("appointmentDate").max = formatDate(maxDate);
-
-  // Cart system
-  let cartCount = 0;
-  function addToCart() {
-    cartCount++;
-    document.getElementById("cartCount").textContent = cartCount;
-    alert("Item added to cart!");
-  }
 </script>
 
-<!-- Search Auto Suggest -->
+<!-- Search Functionality -->
 <script>
   const spareParts = [
     "Engine Oil", "Brake Pads", "Castrol 10W40", "Spark Plug", "Air Filter",
@@ -380,6 +310,14 @@
     }
   });
 </script>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
+  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
+  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
+</section>
 
 </body>
 </html>
