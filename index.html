@@ -228,7 +228,14 @@
   <button onclick="logout()" class="button-primary">Logout</button>
 </section>
 
-<!-- WhatsApp Chat -->
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
+  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
+</section>
+
+<!-- WhatsApp Chat Button -->
 <script>
   window.onload = function () {
     const chatBtn = document.createElement("a");
@@ -245,6 +252,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
+<!-- Firebase Configuration and Logic -->
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyDGGuoM1RCdV-n9pkmw_c6wvGoejnu6rOE",
@@ -305,6 +313,7 @@
     });
   }
 
+  // Booking date logic
   const today = new Date();
   const maxDate = new Date();
   maxDate.setDate(today.getDate() + 7);
@@ -312,6 +321,7 @@
   document.getElementById("appointmentDate").min = formatDate(today);
   document.getElementById("appointmentDate").max = formatDate(maxDate);
 
+  // Cart system
   let cartCount = 0;
   function addToCart() {
     cartCount++;
@@ -320,7 +330,7 @@
   }
 </script>
 
-<!-- Search Functionality -->
+<!-- Search Auto Suggest -->
 <script>
   const spareParts = [
     "Engine Oil", "Brake Pads", "Castrol 10W40", "Spark Plug", "Air Filter",
@@ -370,14 +380,6 @@
     }
   });
 </script>
-
-<!-- Contact Section -->
-<section id="contact" class="section">
-  <h2>Contact Us</h2>
-  <p>Phone: <a href="tel:7762934833">7762934833</a></p>
-  <p>Email: <a href="mailto:Mumtaz007alam@gmail.com">Mumtaz007alam@gmail.com</a></p>
-  <p><a href="https://www.google.com/maps?q=26.8069560,84.5092640" target="_blank">Locate Us on Map</a></p>
-</section>
 
 </body>
 </html>
